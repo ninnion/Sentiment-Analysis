@@ -34,6 +34,15 @@ from langdetect import detect
 
 BEARER_TOKEN = "AAAAAAAAAAAAAAAAAAAAAGdBNgEAAAAAebL5tbsCMiq7TRRAskhG67nHrAg%3DyfHiDGamgrGsx9xfCBQ2Xacjoa1Xm8PbhqdNu763aAj3lRfi2m"
 
+sentimentList = []
+neededSentiments = 500
+
+def Average(lst):
+    if len(lst == 0):
+        return len(lst)
+    else:
+        return sum(lst[-neededSentiments: ]) / neededSentiments
+
 def create_headers(bearer_token):
     headers = {"Authorization": "Bearer {}".format(bearer_token)}
     return headers
@@ -114,9 +123,21 @@ def get_stream(headers, set, bearer_token):
                     print(tweet)
 
                     ##try:
-                    #     classes = ['Bearish', 'Neutral', 'Bullish']
+                    #     -1 Bearish, 0 Neutral, 1 Bullish
+                    #     classes = ['BEARISH', 'NEUTRAL', 'BULLISH']
                     ##    probabilites = classifier.predict_one(tweet)
-                    ##    print(classes[np.argmax(probabilites)])
+                    ##    polarity = (classes[np.argmax(probabilites)]
+                    ##    sentimentList.append(polarity)
+
+                    ##    if len(sentimentList) > 50:
+                    ##         endList = sentimentList[-50:]
+                    ##         print('********* Total Bullish: ' + str(endList.count('BULLISH')))
+                    ##         print('********* Total Bearish: ' + str(endList.count('BEARISH')))
+
+                    ##         if endList.count('BULLISH') > 40:
+                    ##         # BUY Signal
+                    ##         elif endList.count('BEARISH') > 40:
+                    ##         # SELL Signal
                     ## except:
                     ##    pass
                     #tweetlst = [tweet]
