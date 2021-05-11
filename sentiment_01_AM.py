@@ -1,12 +1,3 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Fri May  7 09:54:49 2021
-
-@author: alexandremoine
-"""
-
-
 # Load modules
 # ---------------------------------------------------------------------------
 
