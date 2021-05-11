@@ -128,15 +128,19 @@ def get_stream(headers, set, bearer_token):
             #print(tweet)
             try:
                 if detect(tweet) == 'en':
-                     analyzer = SentimentIntensityAnalyzer()
+                    analyzer = SentimentIntensityAnalyzer()
                     vs = analyzer.polarity_scores(tweet)
                     print("\033[0;0m {:-<65} {}".format(tweet, str(vs)))
+                    # \033 (Escape code for colour; 0 (no effect for style)
                     if vs["compound"] > 0.5:
-                        print("\033[1;32;40m Net sentiment score:", vs["compound"], "\n") 
+                        print("\033[1;32;40m Net sentiment score:", vs["compound"], "\n")
+                        # \033 (Escape code for colour; 1 (bold style); 32 (Bright Green); 40m (black background colour)
                     elif vs["compound"] < -0.5:
                         print("\033[1;31;40m Net sentiment score:", vs["compound"], "\n")
+                        # \033 (Escape code for colour; 1 (bold style); 31 (Red); 40m (black background colour)
                     else:
                         print("\033[1;33;40m Net sentiment score:", vs["compound"], "\n")
+                        # \033 (Escape code for colour; 1 (bold style); 33 (Yellow); 40m (black background colour)
                     ##try:
                     #     -1 Bearish, 0 Neutral, 1 Bullish
                     #     classes = ['BEARISH', 'NEUTRAL', 'BULLISH']
