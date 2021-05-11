@@ -122,6 +122,50 @@ def set_rules(headers, delete, bearer_token):
         )
     print(json.dumps(response.json()))
 
+    
+# Customize dictionary
+# ---------------------------------------------------------------------------
+# about the compound score
+# -> most used by researches
+# -> between -1 (most extreme negative) and 1 (most extreme positive)
+# -> positve >= 0.5
+# -> negative <= -0.5
+# -> between - 0.5 and 0.5
+
+# about the pos, neg, neu ratios
+# -> proportions, add up to 1
+# -> raw categorization, no VADER rule-based enhancements applied
+# -> no word-order sensitivity, modifiers, amplifiers, negation polarity switches, or contrastive conjunction sensitivity
+
+# about the lexicon
+# -> stored as: vader_lexicon.txt
+# -> labels: TOKEN, MEAN-SENTIMENT-RATING, STANDARD DEVIATION, and RAW-HUMAN-SENTIMENT-RATINGS
+# -> NOTE: The current algorithm makes immediate use of the first two elements (token and mean valence)
+# -> The final two elements (SD and raw ratings) are provided for rigor
+# -> you should find 10 independent humans to evaluate/rate each new token you want to add to the lexicon
+# -> make sure the standard deviation doesn't exceed 2.5, and take the average rating for the valence.
+
+# Examples:
+    # best	3.2	0.6	[2, 4, 4, 3, 4, 3, 3, 3, 3, 3]
+    # good	1.9	0.9434	[2, 1, 1, 3, 2, 4, 2, 2, 1, 1]
+    # bad	-2.5	0.67082	[-3, -2, -4, -3, -2, -2, -3, -2, -2, -2]
+    # worst	-3.1	1.04403	[-4, -4, -3, -1, -3, -4, -2, -2, -4, -4]
+    # worth	0.9	0.9434	[0, 0, 1, 1, 2, 1, 1, 3, 0, 0]
+    # worthless	-1.9	1.13578	[-3, -1, -3, -4, -1, -3, -1, -1, -1, -1]
+    # shit	-2.6	1.0198	[-2, -1, -4, -3, -4, -4, -2, -2, -2, -2]
+
+# ADDING new words to the lexicon (NOT WORKING)
+#new_words = {
+    #"sell": -2.5, "buy": 2.5, "moon": 1.5, "down": -2.0, "downwards": -2.0,
+    #"up": 2.0, "upwards": 2.0
+    #}
+#analyzer = SentimentIntensityAnalyzer()
+#analyzer.lexicon.update(new_words)
+
+# REMOVING words from the lexicon (NOT WORKING
+#analyzer = SentimentIntensityAnalyzer()
+#analyzer.lexicon.pop("miss")
+
 
 # Tweet Stream and Sentiment Analysis with VADER
 # ---------------------------------------------------------------------------
