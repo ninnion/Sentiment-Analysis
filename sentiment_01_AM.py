@@ -130,8 +130,13 @@ def get_stream(headers, set, bearer_token):
                 if detect(tweet) == 'en':
                      analyzer = SentimentIntensityAnalyzer()
                     vs = analyzer.polarity_scores(tweet)
-                    print("{:-<65} {}".format(tweet, str(vs)))
-                    print("NET SENTIMENT SCORE:", vs["compound"])
+                    print("\033[0;0m {:-<65} {}".format(tweet, str(vs)))
+                    if vs["compound"] > 0.5:
+                        print("\033[1;32;40m Net sentiment score:", vs["compound"], "\n") 
+                    elif vs["compound"] < -0.5:
+                        print("\033[1;31;40m Net sentiment score:", vs["compound"], "\n")
+                    else:
+                        print("\033[1;33;40m Net sentiment score:", vs["compound"], "\n")
                     ##try:
                     #     -1 Bearish, 0 Neutral, 1 Bullish
                     #     classes = ['BEARISH', 'NEUTRAL', 'BULLISH']
