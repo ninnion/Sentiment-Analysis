@@ -22,6 +22,31 @@ from langdetect import detect
 # classifier = SentenceClassifier(model_path='./output')
 
 
+# Asking for input
+# ---------------------------------------------------------------------------
+
+# aks for an input that should be searched
+a = (input("Hi! Enter a term or word that you want to get the live Twitter sentiment: "))
+
+# try if entered input can be transformed into a string
+# otherwise the user will be asked again to enter a input
+while type(a)!=str:
+  try:
+    a = str(a)
+  except:
+    print("Only strings can be counted!")
+    a = (input("Please try again with a string? "))
+    continue
+
+# check if entered word is only one word
+while len(a.split()) != 1:
+    print("You entered more than one word or nothing")
+    a = input("Please try again and enter only ONE term? ")
+
+b = "#" + a
+# add the hashtag to the term for the search later
+
+
 # Bearer Token
 # ---------------------------------------------------------------------------
 
@@ -80,7 +105,7 @@ def delete_all_rules(headers, bearer_token, rules):
 def set_rules(headers, delete, bearer_token):
     # You can adjust the rules if needed
     sample_rules = [
-        {"value": "#bitcoin", "tag": "bitcoin"},
+        {"value": b, "tag": a},
         #{"value": "cat has:images -grumpy", "tag": "cat pictures"},
     ]
     payload = {"add": sample_rules}
