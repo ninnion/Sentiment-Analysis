@@ -24,6 +24,7 @@ from langdetect import detect
 
 # Bearer Token
 # ---------------------------------------------------------------------------
+
 BEARER_TOKEN = "AAAAAAAAAAAAAAAAAAAAAGdBNgEAAAAAebL5tbsCMiq7TRRAskhG67nHrAg%3DyfHiDGamgrGsx9xfCBQ2Xacjoa1Xm8PbhqdNu763aAj3lRfi2m"
 
 
