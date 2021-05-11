@@ -120,9 +120,11 @@ def get_stream(headers, set, bearer_token):
             try:
                 if detect(tweet) == 'en':
                     analyzer = SentimentIntensityAnalyzer()
+                    # Function from VADER
                     vs = analyzer.polarity_scores(tweet)
+                    # Polarity score witch compound index from -1 (negative) to +1 (positve)
                     print("\033[0;0m {:-<65} {}".format(tweet, str(vs)))
-                    # \033 (Escape code for colour; 0 (no effect for style)
+                    # \033 (Escape code for colour); 0 (no effect for style); resetting the colour coding
                     if vs["compound"] > 0.5:
                         print("\033[1;32;40m Net sentiment score:", vs["compound"], "\n")
                         # \033 (Escape code for colour; 1 (bold style); 32 (Bright Green); 40m (black background colour)
