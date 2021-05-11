@@ -120,7 +120,7 @@ def get_stream(headers, set, bearer_token):
             try:
                 if detect(tweet) == 'en':
                     analyzer = SentimentIntensityAnalyzer()
-                    # Function from VADER
+                    # Function from VADER (sentiment analysis model that measures polarity and intensity of emotions)
                     vs = analyzer.polarity_scores(tweet)
                     # Polarity score witch compound index from -1 (negative) to +1 (positve)
                     print("\033[0;0m {:-<65} {}".format(tweet, str(vs)))
