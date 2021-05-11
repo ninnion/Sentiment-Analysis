@@ -9,6 +9,7 @@ Created on Fri May  7 09:54:49 2021
 
 # Load modules
 # ---------------------------------------------------------------------------
+
 # import pandas as pd
 # -> not used
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
