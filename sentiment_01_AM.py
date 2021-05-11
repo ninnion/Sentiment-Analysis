@@ -143,7 +143,8 @@ def set_rules(headers, delete, bearer_token):
 # -> NOTE: The current algorithm makes immediate use of the first two elements (token and mean valence)
 # -> The final two elements (SD and raw ratings) are provided for rigor
 # -> you should find 10 independent humans to evaluate/rate each new token you want to add to the lexicon
-# -> make sure the standard deviation doesn't exceed 2.5, and take the average rating for the valence.
+# -> make sure the standard deviation doesn't exceed 2.5, and take the average rating for the valence
+# -> each word is assigned a sentiment score (between -4 and +4)
 
 # Examples:
     # best	3.2	0.6	[2, 4, 4, 3, 4, 3, 3, 3, 3, 3]
