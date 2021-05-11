@@ -7,32 +7,36 @@ Created on Fri May  7 09:54:49 2021
 """
 
 
+# Load modules
+# ---------------------------------------------------------------------------
+# import pandas as pd
+# -> not used
+from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 import requests
 # import os
 import json
-
 # import config
-# for hierarchical configuration scheme with support for mappings and sequences
-
+# -> for hierarchical configuration scheme with support for mappings and sequences
 # import preprocessor as p
-# not used (apperently)
-
-# suited for simple preprocessing of Python files
-
+# -> not used (apperently)
+# -> suited for simple preprocessing of Python files
 from langdetect import detect
-# for language detection
-
+# -> for language detection
 # from csv import writer
-# not used
-
-#from ernie import SentenceClassifier
-
+# -> not used
+# from ernie import SentenceClassifier
 # import numpy as np
-# not used
-
+# -> not used
 # classifier = SentenceClassifier(model_path='./output')
 
+
+# Bearer Token
+# ---------------------------------------------------------------------------
 BEARER_TOKEN = "AAAAAAAAAAAAAAAAAAAAAGdBNgEAAAAAebL5tbsCMiq7TRRAskhG67nHrAg%3DyfHiDGamgrGsx9xfCBQ2Xacjoa1Xm8PbhqdNu763aAj3lRfi2m"
+
+
+# Getting the tweets
+# ---------------------------------------------------------------------------
 
 sentimentList = []
 neededSentiments = 500
@@ -99,6 +103,9 @@ def set_rules(headers, delete, bearer_token):
     print(json.dumps(response.json()))
 
 
+# Tweet Stream and Sentiment Analysis with VADER
+# ---------------------------------------------------------------------------
+
 def get_stream(headers, set, bearer_token):
     response = requests.get(
         "https://api.twitter.com/2/tweets/search/stream", headers=headers, stream=True,
@@ -120,8 +127,10 @@ def get_stream(headers, set, bearer_token):
             #print(tweet)
             try:
                 if detect(tweet) == 'en':
-                    print(tweet)
-
+                     analyzer = SentimentIntensityAnalyzer()
+                    vs = analyzer.polarity_scores(tweet)
+                    print("{:-<65} {}".format(tweet, str(vs)))
+                    print("NET SENTIMENT SCORE:", vs["compound"])
                     ##try:
                     #     -1 Bearish, 0 Neutral, 1 Bullish
                     #     classes = ['BEARISH', 'NEUTRAL', 'BULLISH']
