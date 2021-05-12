@@ -148,12 +148,19 @@ def set_rules(headers, delete, bearer_token):
 
 # Examples:
     # best	3.2	0.6	[2, 4, 4, 3, 4, 3, 3, 3, 3, 3]
+      # print(analyzer.lexicon["best"])
     # good	1.9	0.9434	[2, 1, 1, 3, 2, 4, 2, 2, 1, 1]
+      # print(analyzer.lexicon["good"])
     # bad	-2.5	0.67082	[-3, -2, -4, -3, -2, -2, -3, -2, -2, -2]
+      # print(analyzer.lexicon["bad"])
     # worst	-3.1	1.04403	[-4, -4, -3, -1, -3, -4, -2, -2, -4, -4]
+      # print(analyzer.lexicon["worst"])
     # worth	0.9	0.9434	[0, 0, 1, 1, 2, 1, 1, 3, 0, 0]
+      # print(analyzer.lexicon["worth"])
     # worthless	-1.9	1.13578	[-3, -1, -3, -4, -1, -3, -1, -1, -1, -1]
+      # print(analyzer.lexicon["worthless"])
     # shit	-2.6	1.0198	[-2, -1, -4, -3, -4, -4, -2, -2, -2, -2]
+      # print(analyzer.lexicon["shit"])
 
 # ADDING new words to the lexicon (NOT WORKING)
 #new_words = {
@@ -163,8 +170,20 @@ def set_rules(headers, delete, bearer_token):
 #analyzer = SentimentIntensityAnalyzer()
 #analyzer.lexicon.update(new_words)
 
+# ADDING new words to the lexicon (WORKING)
+analyzer.lexicon.update({"sell": -2.5, "buy": 2.5, "moon": 1.5, "down": -2.0, "downwards": -2.0,
+                         "up": 2.0, "upwards": 2.0
+                        })
+
+# Check if added word is in the lexicon
+# print(analyzer.lexicon["sell"])
+
 # REMOVING words from the lexicon (NOT WORKING)
-# analyzer.lexicon.pop("miss")
+analyzer.lexicon.pop("miss")
+
+# Check if added word is still in the lexicon
+# print(analyzer.lexicon["miss"])
+# -> should get you an error message
 
 
 # Tweet Stream and Sentiment Analysis with VADER
