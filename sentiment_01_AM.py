@@ -162,12 +162,13 @@ def set_rules(headers, delete, bearer_token):
     # shit	-2.6	1.0198	[-2, -1, -4, -3, -4, -4, -2, -2, -2, -2]
       # print(analyzer.lexicon["shit"])
 
+analyzer = SentimentIntensityAnalyzer()
+
 # ADDING new words to the lexicon (NOT WORKING)
 #new_words = {
     #"sell": -2.5, "buy": 2.5, "moon": 1.5, "down": -2.0, "downwards": -2.0,
     #"up": 2.0, "upwards": 2.0
     #}
-#analyzer = SentimentIntensityAnalyzer()
 #analyzer.lexicon.update(new_words)
 
 # ADDING new words to the lexicon (WORKING)
@@ -210,7 +211,6 @@ def get_stream(headers, set, bearer_token):
             #print(tweet)
             try:
                 if detect(tweet) == 'en':
-                    analyzer = SentimentIntensityAnalyzer()
                     # Function from VADER (sentiment analysis model that measures polarity and intensity of emotions)
                     vs = analyzer.polarity_scores(tweet)
                     # Polarity score witch compound index from -1 (negative) to +1 (positve)
