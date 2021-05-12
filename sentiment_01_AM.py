@@ -163,9 +163,8 @@ def set_rules(headers, delete, bearer_token):
 #analyzer = SentimentIntensityAnalyzer()
 #analyzer.lexicon.update(new_words)
 
-# REMOVING words from the lexicon (NOT WORKING
-#analyzer = SentimentIntensityAnalyzer()
-#analyzer.lexicon.pop("miss")
+# REMOVING words from the lexicon (NOT WORKING)
+# analyzer.lexicon.pop("miss")
 
 
 # Tweet Stream and Sentiment Analysis with VADER
