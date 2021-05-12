@@ -46,7 +46,7 @@ while len(a.split()) != 1:
 b = "#" + a
 # add the hashtag to the term for the search later
 
-# to think about
+# to think about: case sensitivity!!
 #   should we put the input all to lower case: a.lower() -> would be better for hashtags, but not good for Ticker search (e.g. BTC, AAPL)
 
 # Bearer Token
