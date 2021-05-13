@@ -229,15 +229,15 @@ def get_stream(headers, set, bearer_token):
                     else:
                         print("\033[1;33;40m Net sentiment score:", vs["compound"], "\n")
                         # \033 (Escape code for colour; 1 (bold style); 33 (Yellow); 40m (black background colour)
-                 if len(sentimentList) > 50:
+                 if len(sentimentList)%50 == 0:
                     endList = sentimentList[-50:]
-                    # print("\033[0;0m ********* Sentiment mean score of last 50 tweets: " + str(np.mean(endList)))
+                    print("\033[0;0m ********* Sentiment mean score of last 50 tweets: " + str(np.mean(endList)))
                     print("\033[0;0m ********* Net sentiment score of last 50 tweets: " + str(sum(endList)))
                     # choosing the net sentiment (= sum of all 50 last sentiment) as an average measure
                     # QUESTION: mean would not work very well as for a lot of neutral tweets the average would always be close to 0 (or do we want to see that?)
                             
                     # printing out the general suggestion based on the sentiment of the last 50 tweets
-                    if sum(endList) > 0.4:
+                    if sum(endList) > 0.5:
                         print("\033[1;32;40m========================================================================")
                         print("|>                                                                    <|")
                         print("|>                              !!!!!                                 <|")
@@ -245,7 +245,7 @@ def get_stream(headers, set, bearer_token):
                         print("|>                              !!!!!                                 <|")
                         print("|>                                                                    <|")
                         print("========================================================================")
-                    if sum(endList) < -0.4:
+                    if sum(endList) < -0.5:
                        print("\033[1;31;40m========================================================================")
                        print("|>                                                                    <|")
                        print("|>                               !!!!                                 <|")
