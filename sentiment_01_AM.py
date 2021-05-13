@@ -17,8 +17,7 @@ from langdetect import detect
 # from csv import writer
 # -> not used
 # from ernie import SentenceClassifier
-# import numpy as np
-# -> not used
+import numpy as np
 # classifier = SentenceClassifier(model_path='./output')
 
 
