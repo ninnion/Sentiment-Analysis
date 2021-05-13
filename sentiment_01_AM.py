@@ -231,7 +231,7 @@ def get_stream(headers, set, bearer_token):
                         # \033 (Escape code for colour; 1 (bold style); 33 (Yellow); 40m (black background colour)
                 if len(sentimentList) != 0 and len(sentimentList)%50 == 0:
                     endList = sentimentList[-50:]
-                    print("\033[0;0m ********* Sentiment mean score of last 50 tweets: " + str(np.mean(endList)))
+                    print("\033[0;0m ********* Sentiment mean score of last 50 tweets: " + str(np.mean(round(endList, 2)))
                     # print("\033[0;0m ********* Net sentiment score of last 50 tweets: " + str(sum(endList)))
                     # average of the compound sentiment score of last 50 tweets
                     # QUESTION: What is the better measure here? mean or sum?
