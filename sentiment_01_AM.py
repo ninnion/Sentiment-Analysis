@@ -59,9 +59,6 @@ BEARER_TOKEN = "AAAAAAAAAAAAAAAAAAAAAGdBNgEAAAAAebL5tbsCMiq7TRRAskhG67nHrAg%3Dyf
 # Getting the tweets
 # ---------------------------------------------------------------------------
 
-sentimentList = []
-neededSentiments = 500
-
 def Average(lst):
     if len(lst == 0):
         return len(lst)
@@ -191,6 +188,11 @@ analyzer.lexicon.pop("miss")
 # Tweet Stream and Sentiment Analysis with VADER
 # ---------------------------------------------------------------------------
 
+sentimentList = []
+# empty list to store the compound sentiment score afterwards
+neededSentiments = 500
+# QUESTION: neededSentiment set to 500 (do not remeber why??)
+
 def get_stream(headers, set, bearer_token):
     response = requests.get(
         "https://api.twitter.com/2/tweets/search/stream", headers=headers, stream=True,
@@ -217,6 +219,8 @@ def get_stream(headers, set, bearer_token):
                     # Polarity score witch compound index from -1 (negative) to +1 (positve)
                     print("\033[0;0m {:-<65} {}".format(tweet, str(vs)))
                     # \033 (Escape code for colour); 0 (no effect for style); resetting the colour coding
+                    sentimentList.append(vs["compound"])
+                    # storing the compound sentiment score in the empty list sentimentList
                     if vs["compound"] > 0.5:
                         print("\033[1;32;40m Net sentiment score:", vs["compound"], "\n")
                         # \033 (Escape code for colour; 1 (bold style); 32 (Bright Green); 40m (black background colour)
@@ -226,6 +230,7 @@ def get_stream(headers, set, bearer_token):
                     else:
                         print("\033[1;33;40m Net sentiment score:", vs["compound"], "\n")
                         # \033 (Escape code for colour; 1 (bold style); 33 (Yellow); 40m (black background colour)
+                    
                     ##try:
                     #     -1 Bearish, 0 Neutral, 1 Bullish
                     #     classes = ['BEARISH', 'NEUTRAL', 'BULLISH']
