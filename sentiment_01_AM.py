@@ -257,7 +257,7 @@ def get_stream(headers, set, bearer_token):
                        print("\033[1;33;40m========================================================================")
                        print("|>                                                                    <|")
                        print("|>                                                                    <|")
-                       print("|>                    Uncertain or neutral sentiment                  <|")
+                       print("|>                                HOLD                                <|")
                        print("|>                                                                    <|")
                        print("|>                                                                    <|")
                        print("========================================================================")
