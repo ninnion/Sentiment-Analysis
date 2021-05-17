@@ -1,0 +1,379 @@
+#%% PREAMBLE
+# FILENAME:         sentiment.py 
+# COURSE:           Skills - Programming with Advanced Computer Languages (8,789,1.00)
+# PROJECT LANGUAGE: Python
+# PROJECT NAME:     Sentiment Analysis
+# GITHUB-URL:       https://github.com/ninnion/Sentiment-Analysis
+# DESCRIPTION:      Generate BUY/HOLD/SELL rating for financial assets based on live Twitter sentiment analysis.
+# GROUP ID:         2306
+#
+# GROUP MEMBERS:
+# LAST NAME,        FIRST NAME,     STUDENT-ID,     CODINGXCAMP-ID,     GITHUB-ID
+# Flemming,         Julian,         16-608-143,     JulianF.,           ninnion 
+# Heim,             Simona,         15-613-623,     tapioca,            tapioca7 
+# Moine,            Alexandre,      15-052-319,     MrPineapple,        GoldenPineappleR
+# Spichiger,        Matthias,       15-937-667,     Matt 32,            MatthiasSP
+#
+# TECHNICAL DETAILS:
+# PYTHON VERSION:   3.9.5
+# SPYDER VERSION:   4.2.5 (Currently working with Python version 3.8.8)
+
+#%% INSTALL LIBRARIES
+# In Anaconda Prompt write: >'pip install vaderSentiment' and press 'ENTER'.
+# In the same prompt, write >'pip install langdetect' and press 'ENTER'.
+
+#%% IMPORT LIBRARIES 
+# VADER | Valence Aware Dictionary and sEntiment Reasoner (https://github.com/cjhutto/vaderSentiment)
+# To assign sentiment values to tweets
+from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
+
+# REQUESTS (https://docs.python-requests.org/en/master/)
+# To send HTTP/1.1 requests.
+import requests
+
+# JSON (https://www.w3schools.com/python/python_json.asp)
+# To access JSON data from the Twitter API
+import json
+
+# DETECT FROM LANGDETECT (https://pypi.org/project/langdetect/)
+# To recognize English language tweets
+from langdetect import detect
+
+# NUMPY
+# For easy handling of numerical data
+import numpy as np
+
+# MATPLOTLIB.PYPLOT
+# For live plotting of the sentiment scores
+import matplotlib.pyplot as plt
+
+#%% BEARER_TOKEN
+# QUESTION: Describe what the BEARER_TOKEN is | why it is needed.
+BEARER_TOKEN = "AAAAAAAAAAAAAAAAAAAAAGdBNgEAAAAAebL5tbsCMiq7TRRAskhG67nHrAg%3DyfHiDGamgrGsx9xfCBQ2Xacjoa1Xm8PbhqdNu763aAj3lRfi2m"
+    
+#%% ANALYZER
+analyzer = SentimentIntensityAnalyzer()
+
+#%% CUSTOMIZE DICTIONARY
+# About the compound score
+# -> most used by researches
+# -> between -1 (most extreme negative) and 1 (most extreme positive)
+# -> positve >= 0.5
+# -> negative <= -0.5
+# -> between - 0.5 and 0.5
+
+# About the pos, neg, neu ratios
+# -> proportions, add up to 1
+# -> raw categorization, no VADER rule-based enhancements applied
+# -> no word-order sensitivity, modifiers, amplifiers, negation polarity switches, or contrastive conjunction sensitivity
+
+# About the lexicon
+# -> stored as: vader_lexicon.txt
+# -> labels: TOKEN, MEAN-SENTIMENT-RATING, STANDARD DEVIATION, and RAW-HUMAN-SENTIMENT-RATINGS
+# -> NOTE: The current algorithm makes immediate use of the first two elements (token and mean valence)
+# -> The final two elements (SD and raw ratings) are provided for rigor
+# -> you should find 10 independent humans to evaluate/rate each new token you want to add to the lexicon
+# -> make sure the standard deviation does not exceed 2.5, and take the average rating for the valence
+# -> each word is assigned a sentiment score (between -4 and +4)
+
+# Examples:
+print(analyzer.lexicon['best'])
+# 3.2	0.6	[2, 4, 4, 3, 4, 3, 3, 3, 3, 3]
+print(analyzer.lexicon['good'])
+# 1.9	0.9434	[2, 1, 1, 3, 2, 4, 2, 2, 1, 1]
+print(analyzer.lexicon['bad'])
+# -2.5	0.67082	[-3, -2, -4, -3, -2, -2, -3, -2, -2, -2]   
+print(analyzer.lexicon['worst'])
+# -3.1	1.04403	[-4, -4, -3, -1, -3, -4, -2, -2, -4, -4]    
+print(analyzer.lexicon['worth'])
+# 0.9	0.9434	[0, 0, 1, 1, 2, 1, 1, 3, 0, 0]   
+print(analyzer.lexicon['worthless'])
+# -1.9	1.13578	[-3, -1, -3, -4, -1, -3, -1, -1, -1, -1]  
+print(analyzer.lexicon['shit'])
+# -2.6	1.0198	[-2, -1, -4, -3, -4, -4, -2, -2, -2, -2]
+
+#%% ADDING WORDS TO LEXICON
+# Create a function (?) change_lexicon
+# Add a preexisting dictionary about finance slang? -> Manually add the scores?
+# Add slang such as "to the moon", "diamond hands", "paper hands", ...
+
+new_words = {"sell": -2.5, "buy": 2.5, "moon": 1.5, "down": -2.0, "downwards": -2.0, "up": 2.0, "upwards": 2.0}
+
+analyzer.lexicon.update(new_words)
+
+# Check if added word is in the lexicon
+print(analyzer.lexicon["moon"])
+
+#%% REMOVING WORDS FROM LEXICON
+print(analyzer.lexicon["miss"])
+# -0.6
+analyzer.lexicon.pop("miss")
+# Check if the word has been removed from the lexicon
+print(analyzer.lexicon["miss"])
+# KeyError: 'miss'
+
+#%% CREATE_HEADERS
+def create_headers(bearer_token):
+    # PURPOSE: This function creates the headers.
+    # INPUT:   bearer_token
+    # OUTPUT:  headers
+    # USAGE:   create_headers(bearer_token)
+    
+    headers = {"Authorization": "Bearer {}".format(bearer_token)}
+    
+    return headers
+
+#%% GET_RULES
+def get_rules(headers, bearer_token):
+    # PURPOSE: This function requests the rules.
+    # INPUT:   headers, bearer_token
+    # OUTPUT:  response.json()
+    # USAGE:   get_rules(headers, bearer_token)
+    
+    response = requests.get("https://api.twitter.com/2/tweets/search/stream/rules", headers=headers)
+    
+    if response.status_code != 200:
+        raise Exception("Cannot get rules (HTTP {}): {}".format(response.status_code, response.text))
+        
+    print(json.dumps(response.json()))
+    
+    return response.json()
+
+#%% DELETE_ALL_RULES 
+def delete_all_rules(headers, bearer_token, rules):
+    # PURPOSE: This function deletes all the rules.
+    # INPUT:   headers, bearer_token, rules
+    # OUTPUT:  print(json.dumps(response.json()))
+    # USAGE:   delete_all_rules(headers, bearer_token, rules)
+    
+    if rules is None or "data" not in rules:
+        return None
+
+    ids = list(map(lambda rule: rule["id"], rules["data"]))
+    payload = {"delete": {"ids": ids}}
+    response = requests.post("https://api.twitter.com/2/tweets/search/stream/rules", headers = headers, json = payload)
+    
+    if response.status_code != 200:
+        raise Exception("Cannot delete rules (HTTP {}): {}".format( response.status_code, response.text))
+        
+    print(json.dumps(response.json()))
+
+#%% SET_RULES
+def set_rules(headers, delete, bearer_token):
+    # PURPOSE: This function sets the rules.
+    # INPUT:   headers, delete, bearer_token
+    # OUTPUT:  print(json.dumps(response.json()))
+    # USAGE:   set_rules(headers, delete, bearer_token)
+    
+    # We may adjust the rules if needed:
+    sample_rules = [{"value": b, "tag": a}] # {"value": "cat has:images -grumpy", "tag": "cat pictures"}
+    payload = {"add": sample_rules}
+    response = requests.post("https://api.twitter.com/2/tweets/search/stream/rules", headers = headers, json = payload)
+    
+    if response.status_code != 201:
+        raise Exception("Cannot add rules (HTTP {}): {}".format(response.status_code, response.text))
+        
+    print(json.dumps(response.json()))
+
+#%% MOVING_AVERAGE
+def moving_average(x, N):
+    # PURPOSE: This function calculates the moving average
+    # INPUT:   x (list of numbers), N (integer)
+    # OUTPUT:  a vector as that is the running mean of the input vector
+    # USAGE:   running_mean(x, N)
+    cumsum = np.cumsum(np.insert(x, 0, 0)) 
+    return (cumsum[N:] - cumsum[:-N]) / float(N)
+
+#%% INPUT
+# QUESTION:
+# Ask for user input 
+# my_range = 100
+# N = 10
+
+# QUESTION:
+# Maybe define a function called "get_input()" that we call in main()???
+
+# Recommend max 500 Tweets
+# Twitter API may become exhausted, user has to wait for a while
+    
+# Ask for a single word for which we want to perform our sentiment analysis (e.g: 'bitcoin')
+a = (input("Hi there! Please enter a single word (like 'bitcoin') to perform a live Twitter sentiment analysis: "))
+
+# Check if the entered input can be transformed into a string
+while type(a) != str:
+  try:
+    a = str(a) # Try to convert input to string
+  except:
+    print("Only strings can be counted!")
+    a = (input("Please try again with a string? ")) # Ask to input a string if conversion failed
+    continue
+
+# Check if the input was only one word, if not, ask user to enter one word only
+while len(a.split()) != 1:
+    print("You entered more than one word or nothing")
+    a = input("Please try again and enter only ONE term? ")
+
+# Add a hashtag to the input so that we may search for both hasthags (e.g.: '#bitcoin') and words (e.g.: 'bitcoin')
+b = "#" + a
+
+# QUESTION: case sensitivity!! Should we put the input all to lower case?
+# a.lower() -> would be better for hashtags, but not good for Ticker search (e.g. BTC, AAPL)
+    
+#%% GET_STREAM
+# QUESTION: Find out how to break the loop!
+
+# Maybe add a counter -> Stop the program, evaluate mean of last observations?
+
+def get_stream(headers, set, bearer_token):
+    # PURPOSE: This function accesses the Twitter stream
+    # INPUT:   headers, delete, bearer_token
+    # OUTPUT:  BUY/HOLD/SELL Rating, Sentiment scores
+    # USAGE:   get_stream(headers, set, bearer_token):
+        
+    # Initialize lists to save sentiment score and for plotting:
+    sentimentList = []
+    x_vec = [1]
+    my_range = 300
+    N = 50
+    
+    response = requests.get("https://api.twitter.com/2/tweets/search/stream", headers=headers, stream=True)
+    print(response.status_code)
+    
+    if response.status_code != 200:
+        raise Exception("Cannot get stream (HTTP {}): {}".format(response.status_code, response.text))
+        
+    for response_line in response.iter_lines():
+        
+        if response_line:
+            json_response = json.loads(response_line)
+            #print(json.dumps(json_response, indent=4, sort_keys=True))
+            tweet = json_response['data']['text']
+            #tweet = p.clean(tweet)
+            tweet = tweet.replace(':', '')
+            #print(tweet)
+            try:
+                if detect(tweet) == 'en' and len(sentimentList) < my_range:
+                    # Function from VADER (sentiment analysis model that measures polarity and intensity of emotions)
+                    vs = analyzer.polarity_scores(tweet)
+                    # Polarity score witch compound index from -1 (negative) to +1 (positve)
+                    # \033 (Escape code for colour); 0 (no effect for style); resetting the colour coding
+                    print("\033[0;0m {:-<65} {}".format(tweet, str(vs))) 
+                    # Storing the compound sentiment score in the empty list sentimentList
+                    sentimentList.append(vs["compound"])
+                    # PLOT RUNNING MEAN OF SENTIMENT SCORES LIVE
+                    y_vec = sentimentList
+                    # Create N-Moving Average from sentiment scores
+                    y_vec = moving_average(y_vec, N)
+                    # Plot the N-moving average
+                    plt.plot(x_vec, y_vec, color ='b', linestyle = '-', label = str(N) +"-Mov. Avg.")
+                    # Create dashed lines that indicate cutoffs between Buy/Hold/Sell ratings
+                    plt.axhline(y =  0.66, color = 'k', linestyle = 'dashed')
+                    plt.axhline(y =  0.33, color = 'k', linestyle = 'dashed')
+                    plt.axhline(y =  0.00, color = 'k', linestyle = 'dashed')
+                    plt.axhline(y = -0.33, color = 'k', linestyle = 'dashed')
+                    plt.axhline(y = -0.66, color = 'k', linestyle = 'dashed')
+                    # Add shading in the colors green, yellow, red to the areas indicating Buy/Hold/Sell ratings
+                    plt.axhspan( 1.00,  0.33, facecolor = 'g', alpha = 0.15, label = "Buy")
+                    plt.axhspan( 0.33, -0.33, facecolor = 'y', alpha = 0.15, label = "Hold")
+                    plt.axhspan(-0.33, -1.00, facecolor = 'r', alpha = 0.15, label = "Sell")
+                    # Fix x-axis limits in advance to 'my_range'
+                    plt.xlim([1, my_range-N+2])
+                    # Pre-define x-axis ticks frequency
+                    plt.xticks(np.arange(1, my_range-N+2, step = (my_range-N+1) // 10))
+                    # Fix y-axis limits between -1 and +1 (range of sentiment scores)
+                    plt.ylim([-1, 1])
+                    # Fix y-axis ticks
+                    plt.yticks([-1.00, -0.66, -0.33, 0.00, 0.33, 0.66, 1.00])
+                    # Add plot title, x-axis label and y-axis label.
+                    plt.title(str(N) +"-Mov. Avg. of Twitter Sent. Scores for Term " +"'" +a.upper() +"'")
+                    plt.xlabel("Tweet Number")
+                    # plt.ylabel(str(N) +"-Mov. Avg. of Sent. Scores")
+                    # Add a legend
+                    plt.legend(loc = "upper left")
+                    # Pause the plot shortly after every iteration
+                    plt.pause(0.05)
+                    # Add 1 to x_vector after every iteration
+                    x_vec.append(x_vec[-1] + 1) 
+                    
+                    # PRINT SENTIMENT SCORES FOR INDIVIDUAL TWEETS
+                    if vs["compound"] > 0.33:
+                        # \033 (Escape code for colour; 1 (bold style); 32 (Bright Green); 40m (black background colour)
+                        print("\033[1;32;40m Net sentiment score:", vs["compound"], "\n")
+                        
+                    elif vs["compound"] < -0.33:
+                        # \033 (Escape code for colour; 1 (bold style); 31 (Red); 40m (black background colour)
+                        print("\033[1;31;40m Net sentiment score:", vs["compound"], "\n")
+                        
+                    else:
+                        # \033 (Escape code for colour; 1 (bold style); 33 (Yellow); 40m (black background colour)
+                        print("\033[1;33;40m Net sentiment score:", vs["compound"], "\n")
+                        
+                # PRINT BUY/HOLD/SELL RATING  BASED ON AVERAGE SENTIMENT OF LAST N SCORES
+                if len(sentimentList) != 0 and len(sentimentList)%my_range == 0:
+                    endList = sentimentList[-N:]
+                    # QUESTION: Maybe check that!
+                    # print("\033[0;0m ********* Net sentiment score of last N tweets: " + str(sum(endList)))
+                    print("\033[0;0m ********* Sentiment mean score of last " +str(N) +" tweets: " + str(round(np.mean(endList), 2)))
+                                                
+                    # Printing out the BUY/HOLD/SELL rating based on the sentiment of the last my_range tweets
+                    if np.mean(endList) >= 0.33:
+                        print("\033[1;32;40m========================================================================")
+                        print("|>                                                                    <|")
+                        print("|>                                                                    <|")
+                        print("|>                                                                    <|")
+                        print("|>                              !!!!!                                 <|")
+                        print("|>                              !BUY!                                 <|")
+                        print("|>                              !!!!!                                 <|")
+                        print("|>                               " + str(round(np.mean(endList), 2)) + "                                 <|")
+                        print("|>                                                                    <|")
+                        print("|>                                                                    <|")
+                        print("|>                                                                    <|")
+                        print("========================================================================")
+                        
+                    elif np.mean(endList) <= -0.33:
+                        print("\033[1;31;40m========================================================================")
+                        print("|>                                                                    <|")
+                        print("|>                                                                    <|")
+                        print("|>                                                                    <|")
+                        print("|>                                                                    <|")
+                        print("|>                               !!!!                                 <|")
+                        print("|>                               SELL                                 <|")
+                        print("|>                               !!!!                                 <|")
+                        print("|>                               " + str(round(np.mean(endList), 2)) + "                                 <|")
+                        print("|>                                                                    <|")
+                        print("|>                                                                    <|")
+                        print("|>                                                                    <|")
+                        print("|>                                                                    <|")
+                        print("========================================================================")
+                        
+                    else:
+                        print("\033[1;33;40m========================================================================")
+                        print("|>                                                                    <|")
+                        print("|>                                                                    <|")
+                        print("|>                                                                    <|")
+                        print("|>                                                                    <|")
+                        print("|>                                HOLD                                <|")
+                        print("|>                                " + str(round(np.mean(endList), 2)) + "                                <|")
+                        print("|>                                                                    <|")
+                        print("|>                                                                    <|")
+                        print("|>                                                                    <|")
+                        print("|>                                                                    <|")
+                        print("========================================================================")
+                    break # Break the loop once you reached the desired amount of sentiment scores ('my_range')
+            except:
+                pass
+            
+#%% RUN THE PROGRAM
+def main():
+    # PURPOSE: This function runs the whole program.
+    bearer_token = BEARER_TOKEN
+    headers = create_headers(bearer_token)
+    rules = get_rules(headers, bearer_token)
+    delete = delete_all_rules(headers, bearer_token, rules)
+    set = set_rules(headers, delete, bearer_token)
+    get_stream(headers, set, bearer_token)
+
+if __name__ == "__main__":
+    main()
+    
+#%% END OF PROGRAM
