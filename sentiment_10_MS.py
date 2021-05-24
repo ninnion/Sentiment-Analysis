@@ -48,7 +48,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 #%% BEARER_TOKEN
-# QUESTION: Describe what the BEARER_TOKEN is | why it is needed.
+# The bearer token is a personal token for authentification. It is needed so that the Twitter API accepts our requests.
 BEARER_TOKEN = "AAAAAAAAAAAAAAAAAAAAAGdBNgEAAAAAebL5tbsCMiq7TRRAskhG67nHrAg%3DyfHiDGamgrGsx9xfCBQ2Xacjoa1Xm8PbhqdNu763aAj3lRfi2m"
     
 #%% ANALYZER
@@ -114,7 +114,7 @@ print(analyzer.lexicon["miss"])
 
 #%% CREATE_HEADERS
 def create_headers(bearer_token):
-    # PURPOSE: This function creates the headers.
+    # PURPOSE: This function provides the bearer token to the API.
     # INPUT:   bearer_token
     # OUTPUT:  headers
     # USAGE:   create_headers(bearer_token)
@@ -125,7 +125,7 @@ def create_headers(bearer_token):
 
 #%% GET_RULES
 def get_rules(headers, bearer_token):
-    # PURPOSE: This function requests the rules.
+    # PURPOSE: This function requests the current rules in place.
     # INPUT:   headers, bearer_token
     # OUTPUT:  response.json()
     # USAGE:   get_rules(headers, bearer_token)
@@ -141,7 +141,7 @@ def get_rules(headers, bearer_token):
 
 #%% DELETE_ALL_RULES 
 def delete_all_rules(headers, bearer_token, rules):
-    # PURPOSE: This function deletes all the rules.
+    # PURPOSE: This function resets all rules.
     # INPUT:   headers, bearer_token, rules
     # OUTPUT:  print(json.dumps(response.json()))
     # USAGE:   delete_all_rules(headers, bearer_token, rules)
@@ -160,7 +160,7 @@ def delete_all_rules(headers, bearer_token, rules):
 
 #%% SET_RULES
 def set_rules(headers, delete, bearer_token):
-    # PURPOSE: This function sets the rules.
+    # PURPOSE: This function defines the rules on what tweets to pull.
     # INPUT:   headers, delete, bearer_token
     # OUTPUT:  print(json.dumps(response.json()))
     # USAGE:   set_rules(headers, delete, bearer_token)
@@ -225,7 +225,7 @@ b = "#" + a
 # Maybe add a counter -> Stop the program, evaluate mean of last observations?
 
 def get_stream(headers, set, bearer_token):
-    # PURPOSE: This function accesses the Twitter stream
+    # PURPOSE: This function starts the Twitter stream
     # INPUT:   headers, delete, bearer_token
     # OUTPUT:  BUY/HOLD/SELL Rating, Sentiment scores
     # USAGE:   get_stream(headers, set, bearer_token):
