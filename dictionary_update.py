@@ -21,7 +21,7 @@ import pandas as pd
 
 
 #%% Load Vader lexicon word list from excel file
-vader = pd.read_excel(r"/Users/alexandremoine/Documents/UNI/Master/FS_21/Programming/group_project/dict/vader_lexicon.xlsx",
+vader = pd.read_excel(r"/Users/Documents/vader_lexicon.xlsx",
                             sheet_name= "vader_lexicon", header = None, names = ["word", "score", "variance", "guess"])
 
 
@@ -54,7 +54,7 @@ vader = pd.read_excel(r"/Users/alexandremoine/Documents/UNI/Master/FS_21/Program
 # load the unvertainty word list from the excel file by selecting the right sheet
 # note that there is no header, therefore we create a new column header named "word"
 # check correct path before loading the file
-uncertainty = pd.read_excel(r"/Users/alexandremoine/Documents/UNI/Master/FS_21/Programming/group_project/dict/LoughranMcDonald_SentimentWordLists_2018.xlsx",
+uncertainty = pd.read_excel(r"/Users/Documents/LoughranMcDonald_SentimentWordLists_2018.xlsx",
                             sheet_name= "Uncertainty", header = None, names = ["word"])
 
 # make each word to lower case only
@@ -95,7 +95,7 @@ uncertainties.to_csv(r'c:uncertainties.csv', index = False, sep = " ")
 # load the constraining word list from the excel file by selecting the right sheet
 # note that there is no header, therefore we create a new column header named "word"
 # check correct path before loading the file
-constraining = pd.read_excel(r"/Users/alexandremoine/Documents/UNI/Master/FS_21/Programming/group_project/dict/LoughranMcDonald_SentimentWordLists_2018.xlsx",
+constraining = pd.read_excel(r"/Users/LoughranMcDonald_SentimentWordLists_2018.xlsx",
                             sheet_name= "Constraining", header = None, names = ["word"])
 
 # make each word to lower case only
@@ -135,7 +135,7 @@ constraining.to_csv(r'c:constraining.csv', index = False, sep = " ")
 # load the positive word list from the excel file by selecting the right sheet
 # note that there is no header, therefore we create a new column header named "word"
 # check correct path before loading the file
-positive = pd.read_excel(r"/Users/alexandremoine/Documents/UNI/Master/FS_21/Programming/group_project/dict/LoughranMcDonald_SentimentWordLists_2018.xlsx",
+positive = pd.read_excel(r"/Users/LoughranMcDonald_SentimentWordLists_2018.xlsx",
                             sheet_name= "Positive", header = None, names = ["word"])
 
 # make each word to lower case only
