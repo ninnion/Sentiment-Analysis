@@ -897,7 +897,7 @@ new_words = {"sell": -3, "buy": 3, "moon": 2.5, "mooning": 2.5, "diamond": 1.5, 
 analyzer.lexicon.update(new_words)
 
 # Check if added word is in the lexicon
-# print(analyzer.lexicon["moon"])
+# print(analyzer.lexicon["moon"])
 
 
 #%% CREATE_HEADERS
