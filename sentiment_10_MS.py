@@ -892,7 +892,7 @@ analyzer.lexicon.update(positive_words)
 #%% ADDING WORDS TO LEXICON that still are missing (e.g. slang terms for cryptocurrencies)
 # Add slang such as "to the moon", "diamond hands", "paper hands", ...
 
-new_words = {"sell": -2.5, "buy": 2.5, "moon": 1.5, "down": -2.0, "downwards": -2.0, "up": 2.0, "upwards": 2.0}
+new_words = {"sell": -3, "buy": 3, "moon": 2.5, "mooning": 2.5, "diamond": 1.5, "paper": -1.5, "fomo": 1.5, "shill": -2, "fud": -2, "hodl": 1.5, "rekt": -2 "down": -2.0, "downwards": -2.0, "up": 2.0, "upwards": 2.0}
 
 analyzer.lexicon.update(new_words)
 
