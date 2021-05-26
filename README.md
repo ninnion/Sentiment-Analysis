@@ -53,7 +53,7 @@ The code analyses the sentiment of tweets in real time. The code therefore is st
 - "set_rules": This function defines the rules on what tweets to pull, which sends the requested tweets e.g. "bitcoin" to the API.
 - "get_stream": This function starts the Twitter stream and tweets are being collected.
 
-         Through these functions the rules on what tweets to pull can be influenced as well as the live stream being started.
+   Through these functions the rules on what tweets to pull can be influenced as well as the live stream being started.
 
 2. Analysis of the collected tweets and allocation of a sentiment score between -1.00 (strong negative sentiment) and 1.00 (strong positive sentiment).
 
