@@ -21,7 +21,7 @@ To access the Twitter Developer platform, a Twitter account is needed. The perso
 the following link and following each step in the Developer portal: https://developer.twitter.com/en
 ***
 *** Instructions ***
-
+<img width="571" alt="Bildschirmfoto 2021-05-26 um 09 45 16" src="https://user-images.githubusercontent.com/82701839/119700465-894cb200-be53-11eb-9ab1-96d320eb8f0e.png">
 1. download this repository or copy the code into you IDE. 
 2. Make sure that all pre-requisites are met. We highly recommend using the Spyder IDE and making the "Plots" window visible (which is usually in the upper
 right corner).
