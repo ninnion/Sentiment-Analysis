@@ -412,9 +412,9 @@ def get_stream(headers, set, bearer_token):
                     plt.axhline(y = -0.33, color = 'k', linestyle = 'dashed')
                     plt.axhline(y = -0.66, color = 'k', linestyle = 'dashed')
                     # Add shading in the colors green, yellow, red to the areas indicating Buy/Hold/Sell ratings
-                    plt.axhspan( 1.00,  0.33, facecolor = 'g', alpha = 0.15, label = "Buy")
-                    plt.axhspan( 0.33, -0.33, facecolor = 'y', alpha = 0.15, label = "Hold")
-                    plt.axhspan(-0.33, -1.00, facecolor = 'r', alpha = 0.15, label = "Sell")
+                    plt.axhspan( 1.00,  0.33, facecolor = 'g', alpha = 0.25, label = "Buy")
+                    plt.axhspan( 0.33, -0.33, facecolor = 'y', alpha = 0.25, label = "Hold")
+                    plt.axhspan(-0.33, -1.00, facecolor = 'r', alpha = 0.25, label = "Sell")
                     # Fix x-axis limits in advance to 'my_range'
                     plt.xlim([1, my_range-N+2])
                     # Pre-define x-axis ticks frequency
