@@ -22,15 +22,15 @@ the following link and following each step in the Developer portal: https://deve
 ***
 *** Instructions ***
 
-<img width="571" alt="Bildschirmfoto 2021-05-26 um 09 45 16" src="https://user-images.githubusercontent.com/82701839/119700465-894cb200-be53-11eb-9ab1-96d320eb8f0e.png">
-
-
 1. download this repository or copy the code into you IDE. 
 2. Make sure that all pre-requisites are met. We highly recommend using the Spyder IDE and making the "Plots" window visible (which is usually in the upper
 right corner).
 3. (Recommended) Exchange the existing bearer token with your own bearer token in code line 52.
 4. Run the code.
 5. Fill in the wanted input (search tag/term, the amount of analyzed tweets, the amount of tweets counting for the moving average).
+
+![DOGECOIN_INPUT](https://user-images.githubusercontent.com/60882754/119737907-1a398280-be80-11eb-9f3b-ad795078d5b7.PNG)
+
 6. Wait for a couple seconds until enough tweets are collected and watch the live generated Twitter sentiment analysis graph.
 ***
 *** Files ***
@@ -89,6 +89,10 @@ NOTE: The word lists have been manually copy and pasted
 - To see how we collcected and scored the terms please see addtional script on GitHub called "dictionary_update"
 
 3. Plotting of the analysed tweets based on the moving average of the N last tweets.
+![DOGECOIN_RUNNING](https://user-images.githubusercontent.com/60882754/119736808-96cb6180-be7e-11eb-8c61-cc6085596b8e.PNG)
 
 - To make the current sentiment and its change over the past short time period more readable and interpretable, the data is being visualized by plotting the moving average.
+- 
 At the end of the analysed time frame, a buy, sell or hold suggestion is displayed.
+![DOGECOIN_RESULT](https://user-images.githubusercontent.com/60882754/119736840-a185f680-be7e-11eb-94f5-502844e16106.PNG)
+
