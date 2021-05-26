@@ -45,13 +45,13 @@ The code analyses the sentiment of tweets in real time. The code therefore is st
 
 1. Access and communication to and with the Twitter API
 
-   - The code interacts with the Twitter API through five functions, "create_headers", "get_rules", "delete_all_rules", "set_rules" and "get_stream".
+   The code interacts with the Twitter API through five functions, "create_headers", "get_rules", "delete_all_rules", "set_rules" and "get_stream".
 
    - `create_headers`: This function provides the bearer token to the API.
-   - "get_rules": This function requests the current rules in place.
-   - "delete_all_rules": This function resets all rules.
-   - "set_rules": This function defines the rules on what tweets to pull, which sends the requested tweets e.g. "bitcoin" to the API.
-   - "get_stream": This function starts the Twitter stream and tweets are being collected.
+   - `get_rules`: This function requests the current rules in place.
+   - `delete_all_rules`: This function resets all rules.
+   - `set_rules`: This function defines the rules on what tweets to pull, which sends the requested tweets e.g. "bitcoin" to the API.
+   - `get_stream`: This function starts the Twitter stream and tweets are being collected.
 
    Through these functions the rules on what tweets to pull can be influenced as well as the live stream being started.
 
@@ -59,10 +59,10 @@ The code analyses the sentiment of tweets in real time. The code therefore is st
 
 - With the help of the Vader lexicon, which is additionally updated with manually classified financial terms from the Loughran-McDonald sentiment word list, the streamed tweets are being analyzed.
 
-         About the Loughran-McDonald sentiment word lists
-         - developed word lists to be used for financial content analysis
-         - term classifications regarding a large sample of 10Ks
-         - different categories of words lists like (negative, positive, uncertainty, constraining, etc.)
+   About the Loughran-McDonald sentiment word lists
+   - developed word lists to be used for financial content analysis
+   - term classifications regarding a large sample of 10Ks
+   - different categories of words lists like (negative, positive, uncertainty, constraining, etc.)
 
 Source and further information about the development of the word list
 - Loughran, Tim and McDonald, Bill, When is a Liability not a Liability?
