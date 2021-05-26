@@ -47,7 +47,7 @@ The code analyses the sentiment of tweets in real time. The code therefore is st
 
    - The code interacts with the Twitter API through five functions, "create_headers", "get_rules", "delete_all_rules", "set_rules" and "get_stream".
 
-   - "create_headers": This function provides the bearer token to the API.
+   - `create_headers`: This function provides the bearer token to the API.
    - "get_rules": This function requests the current rules in place.
    - "delete_all_rules": This function resets all rules.
    - "set_rules": This function defines the rules on what tweets to pull, which sends the requested tweets e.g. "bitcoin" to the API.
