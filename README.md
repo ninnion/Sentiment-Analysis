@@ -1,13 +1,13 @@
 # Sentiment-Analysis
----
-*** About ***
-
+----
+## About
+----
 This is a student project of the University of St. Gallen of the course Skills - Programming with Advanced Computer Languages (8,789,1.00).
 The goal of this project was to build a python based script to analyze tweets about crypto currencies in real time and make buy, sell or hold suggestions 
 based on a certain amount of currently analyzed tweets.
-***
-*** Pre-requisites ***
 
+### Pre-requisites
+----
 We recommend using the Spyder IDE (Version 4.1.5/4.2.5 currently working with Python version 3.8.1/3.8.8) since the program plots the live sentiment, which is
 best displayed in the mentioned IDE.
 
@@ -19,9 +19,9 @@ The script gets live tweets through the Twitter developer API, which needs a per
 of the script. Please create your own bearer token, since the one written in the current script is not guaranteed to be accessible forever.
 To access the Twitter Developer platform, a Twitter account is needed. The personal bearer token to access the Twitter API can be created by following
 the following link and following each step in the Developer portal: https://developer.twitter.com/en
-***
-*** Instructions ***
 
+### Instructions
+----
 1. download this repository or copy the code into you IDE. 
 2. Make sure that all pre-requisites are met. We highly recommend using the Spyder IDE and making the "Plots" window visible (which is usually in the upper
 right corner).
@@ -32,15 +32,16 @@ right corner).
 ![DOGECOIN_INPUT](https://user-images.githubusercontent.com/60882754/119737907-1a398280-be80-11eb-9f3b-ad795078d5b7.PNG)
 
 6. Wait for a couple seconds until enough tweets are collected and watch the live generated Twitter sentiment analysis graph.
-***
-*** Files ***
+
+### Files
+----
 - Code File:
 - Dictionary Update script: dictionary_update.py
 - Financial lexicon: LoughranMcDonald_SentimentWordLists_2018.xslx
 - Vader lexicon: vader_lexicon.xslx
-***
-*** Description ***
 
+### Description
+----
 The code analyses the sentiment of tweets in real time. The code therefore is structured as follows:
 
 1. Access and communication to and with the Twitter API
@@ -97,3 +98,4 @@ NOTE: The word lists have been manually copy and pasted
 
 ![DOGECOIN_RESULT](https://user-images.githubusercontent.com/60882754/119736840-a185f680-be7e-11eb-94f5-502844e16106.PNG)
 
+----
