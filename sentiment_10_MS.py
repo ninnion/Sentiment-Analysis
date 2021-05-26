@@ -188,7 +188,7 @@ positive_words = {"able": 1.5 , "abundance": 1.5 , "abundant": 1.5 , "acclaimed"
 "enjoys": 2.3 , "enthusiasm": 1.9 , "enthusiastic": 2.2 , "enthusiastically": 2.6 , "excellence": 3.1 , "excellent": 2.7 , "excelling": 2.5 , "excels": 2.5 , "exceptional": 1.5 , "exceptionally": 1.5 ,
 "excited": 1.4 , "excitement": 2.2 , "exciting": 2.2 , "exclusive": 0.5 , "exclusively": 1.5 , "exclusiveness": 1.5 , "exclusives": 1.5 , "exclusivity": 1.5 , "exemplary": 1.5 , "fantastic": 2.6 ,
 "favorable": 2.1 , "favorably": 1.6 , "favored": 1.8 , "favoring": 1.8 , "favorite": 2.0 , "favorites": 1.8 , "friendly": 2.2 , "gain": 2.4 , "gained": 1.6 , "gaining": 1.8 , "gains": 1.4 ,
-"good": 1.9 , "great": 3.1 , "greater": 1.5 , "greatest": 3.2 , "greatly": 1.5 , "greatness": 1.5 , "happiest": 3.2 , "happily": 2.6 , "happiness": 2.6   "happy": 2.7 , "highest": 1.5 ,
+"good": 1.9 , "great": 3.1 , "greater": 1.5 , "greatest": 3.2 , "greatly": 1.5 , "greatness": 1.5 , "happiest": 3.2 , "happily": 2.6 , "happiness": 2.6 , "happy": 2.7 , "highest": 1.5 ,
 "honor": 2.2 , "honorable": 2.5 , "honored": 2.8 , "honoring": 2.3 , "honors": 2.3 , "ideal": 2.4 , "impress": 1.9 , "impressed": 2.1 , "impresses": 2.1 , "impressing": 2.5 , "impressive": 2.3 ,
 "impressively": 2.0 , "improve": 1.9 , "improved": 2.1 , "improvement": 2.0 , "improvements": 1.3 , "improves": 1.8 , "improving": 1.8 , "incredible": 1.5 , "incredibly": 1.5 , "influential": 1.9 ,
 "informative": 1.5 , "ingenuity": 1.5 , "innovate": 2.2 , "innovated": 1.5 , "innovates": 2.0 , "innovating": 1.5 , "innovation": 1.6 , "innovations": 1.5 , "innovative": 1.9 , "innovativeness": 1.5 ,
