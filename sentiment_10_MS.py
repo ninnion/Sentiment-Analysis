@@ -447,14 +447,15 @@ def get_stream(headers, set, bearer_token):
                     # QUESTION: Maybe check that!
                     # print("\033[0;0m ********* Net sentiment score of last N tweets: " + str(sum(endList)))
                     print("\033[0;0m ********* Sentiment mean score of last " +str(N) +" tweets: " + str(round(np.mean(endList), 2)))
+                    
                     # summary about the inputs
                     print("----------------------------------------------------------------------------------")
-                    print("Ok. We ready to go and looking to get ", c, " tweets about: ", a, "!",
-                          " We will evaluate their sentiment score and give you a recommendation based on a moving average of ", d, ".", sep = "")
                     print("----------------------------------------------------------------------------------")
+                    print("Ok. We are done. Based on ", c, " tweets about '", a, "' we evaluated their sentiment score.", 
+                          "Based on a moving average of ", d, "you will find our suggestion below.",
+                          "No investment advice! Any liability excluded!", sep = "")
                     print("----------------------------------------------------------------------------------")
-                    print("
-                          
+                    print("----------------------------------------------------------------------------------")  
                                                 
                     # Printing out the BUY/HOLD/SELL rating based on the sentiment of the last my_range tweets
                     if np.mean(endList) >= 0.33:
