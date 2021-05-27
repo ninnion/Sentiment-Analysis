@@ -10,8 +10,8 @@ Additional information and details about the inner workings of our code can also
 
 **Members of Group No. 2306**
 
-  |        Name        | Student ID | CodingXCamp ID |    GitHub ID     |
-  | ------------------ |:----------:|--------------- |----------------- |
+  | Name               | Student ID | CodingXCamp ID | GitHub ID        |
+  | ------------------ |:----------:|:-------------: |:----------------:|
   | Julian Flemming    | 16-608-143 | JulianF.       | ninnion          |
   | Simona Heim        | 15-613-623 | tapioca        | tapioca7         |
   | Alexandre Moine    | 15-052-319 | MrPineapple    | GoldenPineappleR |
@@ -42,6 +42,7 @@ of this script.
 Please create your own bearer token, since the one written in the current script can not guarantee access to the Twitter API indefinitely.  
 To create your own bearer token, create a Twitter account and access the Twitter Developer platform, by clicking on this [link](https://developer.twitter.com/en) and following the instructions step-by-step.
 
+
 ### Instructions
 ----
 1. Download this repository or copy the code into your IDE.  
@@ -57,6 +58,7 @@ right corner). We also recommend using the default settings of your IDE, since o
 
 6. Wait a couple seconds until enough tweets are collected for the Twitter sentiment to be plotted live in your plotting pane.
 
+
 ### Files
 ----
 This GitHub page contains the following files:
@@ -64,6 +66,7 @@ This GitHub page contains the following files:
 - Dictionary Update script: `dictionary_update.py`
 - Financial lexicon: `LoughranMcDonald_SentimentWordLists_2018.xslx`
 - Vader lexicon: `vader_lexicon.xslx`
+
 
 ### Description
 ----
@@ -80,9 +83,9 @@ The code interacts with the Twitter API through five functions; `create_headers`
 - `set_rules`: This function defines the rules on which tweets to pull from the API, by sending the search term (e.g. "bitcoin") to the API.
 - `get_stream`: This function starts the Twitter stream and the tweets are being collected, analyzed and displayed.
 
-#### 2. Analysis of the collected tweets and allocation of a sentiment score between -1.00 (strong negative sentiment) and 1.00 (strong positive sentiment).
+#### 2. Analysis of the collected tweets
 
-With the help of the [Vader lexicon](https://github.com/cjhutto/vaderSentiment), which is additionally updated with manually classified financial terms from the Loughran-McDonald sentiment [word list](https://sraf.nd.edu/textual-analysis/resources/#Master%20Dictionary), the streamed tweets are being analyzed.
+With the help of the [Vader lexicon](https://github.com/cjhutto/vaderSentiment), which is additionally updated with manually classified financial terms from the Loughran-McDonald sentiment [word list](https://sraf.nd.edu/textual-analysis/resources/#Master%20Dictionary), the streamed tweets are being analyzed and assigned a sentiment score between -1.00 (strong negative sentiment) and 1.00 (strong positive sentiment).
 
 Quick note about the Loughran-McDonald sentiment word lists:
 - Developed word lists to be used for financial content analysis
