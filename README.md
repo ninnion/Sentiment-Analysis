@@ -55,23 +55,23 @@ The code analyses the sentiment of tweets in real time. The code therefore is st
 
 2. Analysis of the collected tweets and allocation of a sentiment score between -1.00 (strong negative sentiment) and 1.00 (strong positive sentiment).
 
-- With the help of the [Vader lexicon](https://github.com/cjhutto/vaderSentiment), which is additionally updated with manually classified financial terms from the Loughran-McDonald sentiment [word list](https://sraf.nd.edu/textual-analysis/resources/#Master%20Dictionary), the streamed tweets are being analyzed.
+   - With the help of the [Vader lexicon](https://github.com/cjhutto/vaderSentiment), which is additionally updated with manually classified financial terms from the Loughran-McDonald sentiment [word list](https://sraf.nd.edu/textual-analysis/resources/#Master%20Dictionary), the streamed tweets are being analyzed.
 
    About the Loughran-McDonald sentiment word lists
    - developed word lists to be used for financial content analysis
    - term classifications regarding a large sample of 10Ks
    - different categories of words lists like (negative, positive, uncertainty, constraining, etc.)
 
-Source and further information about the development of the word list
-- Loughran, Tim and McDonald, Bill, When is a Liability not a Liability?
-- Textual Analysis, Dictionaries, and 10-Ks (March 4, 2010)
-- Journal of Finance, Forthcoming
-- Available at [SSRN](https://ssrn.com/abstract=1331573)
+   Source and further information about the development of the word list
+   - Loughran, Tim and McDonald, Bill, When is a Liability not a Liability?
+   - Textual Analysis, Dictionaries, and 10-Ks (March 4, 2010)
+   - Journal of Finance, Forthcoming
+   - Available at [SSRN](https://ssrn.com/abstract=1331573)
 
-Use for updating the Vader lexicon
-- Some lists are taken to update the Vader lexicon
-- The goal is to improve the sentiment score in the context of financial terms
-- The addition of follwoing word lists have been made:
+   Use for updating the Vader lexicon
+   - Some lists are taken to update the Vader lexicon
+   - The goal is to improve the sentiment score in the context of financial terms
+   - The addition of follwoing word lists have been made:
 
      | Wordlist      | number of terms|
      | ------------- |:--------------:|
@@ -79,25 +79,25 @@ Use for updating the Vader lexicon
      | Constraining  | 184 terms      |
      | Positive      | 354 terms      |
 
-Double entries:
-- The word lists also contain terms that are already occuring in the Vader lexicon
-- In this case the score from Vader is kept and only new words are scored
+   Double entries:
+   - The word lists also contain terms that are already occuring in the Vader lexicon
+   - In this case the score from Vader is kept and only new words are scored
 
-NOTE: The word lists have been manually copy and pasted
-- This allows it to run the program without downloading addtional files
+   NOTE: The word lists have been manually copy and pasted
+   - This allows it to run the program without downloading addtional files
 
-Please find more detailed information about the dictionary expansion in our additonal script `dictionary_update.py`:
-- How we collected and scored the terms
-- How the strings of terms are created
-- And how we treated double entries
+   Please find more detailed information about the dictionary expansion in our additonal script `dictionary_update.py`:
+   - How we collected and scored the terms
+   - How the strings of terms are created
+   - And how we treated double entries
 
 3. Plotting of the analysed tweets based on the moving average of the N last tweets.
 
-![DOGECOIN_RUNNING](https://user-images.githubusercontent.com/60882754/119736808-96cb6180-be7e-11eb-8c61-cc6085596b8e.PNG)
+   ![DOGECOIN_RUNNING](https://user-images.githubusercontent.com/60882754/119736808-96cb6180-be7e-11eb-8c61-cc6085596b8e.PNG)
 
-- To make the current sentiment and its change over the past short time period more readable and interpretable, the data is being visualized by plotting the moving average.
-- At the end of the analysed time frame, a buy, sell or hold suggestion is displayed.
+   - To make the current sentiment and its change over the past short time period more readable and interpretable, the data is being visualized by plotting the moving average.
+   - At the end of the analysed time frame, a buy, sell or hold suggestion is displayed.
 
-![DOGECOIN_RESULT](https://user-images.githubusercontent.com/60882754/119736840-a185f680-be7e-11eb-94f5-502844e16106.PNG)
+   ![DOGECOIN_RESULT](https://user-images.githubusercontent.com/60882754/119736840-a185f680-be7e-11eb-94f5-502844e16106.PNG)
 
 ----
