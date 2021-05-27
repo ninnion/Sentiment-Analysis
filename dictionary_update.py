@@ -3,7 +3,7 @@
 # COURSE:           Skills - Programming with Advanced Computer Languages (8,789,1.00)
 
 
-# NOTE: This is only an additional script to show how we updated the Vader lexicon
+# NOTE: This is only an ADDITIONAL script to show how we updated the Vader lexicon
 # PLEASE FIND THE WHOLE PROJECT CODE UNDER: https://github.com/ninnion/Sentiment-Analysis
 
 
@@ -14,7 +14,9 @@
 # Moine,            Alexandre,      15-052-319,     MrPineapple,        GoldenPineappleR
 # Spichiger,        Matthias,       15-937-667,     Matt 32,            MatthiasSP
 
-# NOTE: To run this code two files have to be downloaded that are also available on github
+# NOTE: To run this code two files have to be downloaded that are also available on github:
+# -> LoughranMcDonald_SentimentWordLists2018.xlsx
+# -> vader_lexicon.xlsx
 
 #%% INSTALL LIBRARIES
 import pandas as pd
