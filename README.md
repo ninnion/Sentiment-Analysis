@@ -41,7 +41,7 @@ right corner). We also recommend using the IDE on default settings, since otherw
 ----
 The code analyses the sentiment of tweets in real time. The code therefore is structured as follows:
 <ol>
-   <li> 1. Access and communication to and with the Twitter API </li>
+   <li>Access and communication to and with the Twitter API</li>
 
    The code interacts with the Twitter API through five functions, `create_headers`, `get_rules`, `delete_all_rules`, `set_rules` and `get_stream`.
 
@@ -53,7 +53,7 @@ The code analyses the sentiment of tweets in real time. The code therefore is st
 
    Through these functions the rules on what tweets to pull can be influenced as well as the live stream being started.
 
-2. Analysis of the collected tweets and allocation of a sentiment score between -1.00 (strong negative sentiment) and 1.00 (strong positive sentiment).
+<li>Analysis of the collected tweets and allocation of a sentiment score between -1.00 (strong negative sentiment) and 1.00 (strong positive sentiment).</li>
 
    - With the help of the [Vader lexicon](https://github.com/cjhutto/vaderSentiment), which is additionally updated with manually classified financial terms from the Loughran-McDonald sentiment [word list](https://sraf.nd.edu/textual-analysis/resources/#Master%20Dictionary), the streamed tweets are being analyzed.
 
@@ -91,7 +91,7 @@ The code analyses the sentiment of tweets in real time. The code therefore is st
    - How the strings of terms are created
    - And how we treated double entries
 
-3. Plotting of the analysed tweets based on the moving average of the N last tweets.
+   <li>Plotting of the analysed tweets based on the moving average of the N last tweets.</li>
 
    ![DOGECOIN_RUNNING](https://user-images.githubusercontent.com/60882754/119736808-96cb6180-be7e-11eb-8c61-cc6085596b8e.PNG)
 
