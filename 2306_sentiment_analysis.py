@@ -1,5 +1,5 @@
 #%% PREAMBLE
-# FILENAME:         sentiment.py 
+# FILENAME:         2306_sentiment_analysis.py 
 # COURSE:           Skills - Programming with Advanced Computer Languages (8,789,1.00)
 # PROJECT LANGUAGE: Python
 # PROJECT NAME:     Sentiment Analysis
