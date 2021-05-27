@@ -452,8 +452,8 @@ def get_stream(headers, set, bearer_token):
                     print("----------------------------------------------------------------------------------")
                     print("----------------------------------------------------------------------------------")
                     print("Ok. We are done. Based on ", c, " tweets about '", a, "' we evaluated their sentiment score.", 
-                          " Based on a moving average of ", d, "you will find our suggestion below.",
-                          " --- No investment advice! --- Any liability excluded! ---", sep = "")
+                          " Based on a moving average of ", d, "you will find our suggestion below.", sep = "")
+                    print(" No investment advice! Any liability excluded!", sep = "")
                     print("----------------------------------------------------------------------------------")
                     print("----------------------------------------------------------------------------------")  
                                                 
