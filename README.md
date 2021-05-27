@@ -66,7 +66,7 @@ Source and further information about the development of the word list
 - Loughran, Tim and McDonald, Bill, When is a Liability not a Liability?
 - Textual Analysis, Dictionaries, and 10-Ks (March 4, 2010)
 - Journal of Finance, Forthcoming
-- Available at SSRN: https://ssrn.com/abstract=1331573
+- Available at [SSRN](https://ssrn.com/abstract=1331573)
 
 Use for updating the Vader lexicon
 - Some lists are taken to update the Vader lexicon
