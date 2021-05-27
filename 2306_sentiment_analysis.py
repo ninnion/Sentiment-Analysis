@@ -49,15 +49,23 @@ import matplotlib.pyplot as plt
 
 #%% BEARER_TOKEN
 # The bearer token is a personal token for authentification. It is needed so that the Twitter API accepts our requests.
+# You may want to create your own personal bearer token, in which case you should access the this link https://developer.twitter.com/en
+# and follow the instructions. Copy your own bearer token into the code below.
 BEARER_TOKEN = "AAAAAAAAAAAAAAAAAAAAAGdBNgEAAAAAebL5tbsCMiq7TRRAskhG67nHrAg%3DyfHiDGamgrGsx9xfCBQ2Xacjoa1Xm8PbhqdNu763aAj3lRfi2m"
     
 #%% ANALYZER
+# We access the SentimentIntensityAnalyzer function provided in the vaderSentiment library, calling it 'analyzer' for short.
 analyzer = SentimentIntensityAnalyzer()
 
 #%% INPUTS
-# Ask for a single word for which we want to perform our sentiment analysis (e.g: 'bitcoin')
+# In this section, we ask for three inputs:
+# 1. The word/term for which we will perform our sentiment analysis (e.g: 'bitcoin')
+# 2. The number of Tweets to be analyzed and displayed as a live graph of the sentiment scores.
+# 3. The moving average window, on which we will base our BUY/HOLD/SELL-recommendation.
+
+# 1. Ask for a single word for which we want to perform our sentiment analysis (e.g: 'bitcoin')
 a = (input("\033[0;0m Hi there! Please enter a single word (like 'bitcoin') to perform a live Twitter sentiment analysis: "))
-# colour code reset to delete any colour that might be from past runs
+# colour code reset to delete any colour that might be left from past runs of the program
 
 # Check if the entered input can be transformed into a string
 while type(a) != str:
@@ -76,10 +84,10 @@ while len(a.split()) != 1:
 # Add a hashtag to the input so that we may search for both hasthags (e.g.: '#bitcoin') and words (e.g.: 'bitcoin')
 b = "#" + a
 
-# asking for the input regarding amount of tweets (my_range)
+# 2. Asking for the input regarding amount of tweets (my_range)
 c = input("Please enter also the maximum number of tweets you want to get. We recommend any number below 500: ")
-# try if entered string can be transformed into an integer
-# otherwise the user will be asked again to enter a number, again and again
+# Try if entered string can be transformed into an integer
+# Otherwise the user will be asked again to enter a number, again and again
 while type(c)!=int:
   try:
     c = int(c)
@@ -87,13 +95,13 @@ while type(c)!=int:
     print("Sorry, only integers are allowed!")
     c = (input("Please try again and enter an integer for the total number of tweets to analyse? "))
     continue
-# Recommend max 500 Tweets
-# Twitter API may become exhausted, user has to wait for a while
+# We recommend a maximum of 500 tweets to be analyzed because the Twitter API may become exhausted, 
+# in which case the user has to wait for a few minutes until he can run the program again.
 
-# asking for the input regarding the moving average (N)
+# Asking for the moving-average window (N)
 d = input("Now please select the window for the moving average (average of n-last entries; recommended range: 5-20): ")
-# try if entered string can be transformed into an integer
-# otherwise the user will be asked again to enter a number, again and again
+# Try if entered string can be transformed into an integer
+# Otherwise the user will be asked again to enter a number, again and again
 while type(d)!=int:
   try:
     d = int(d)
@@ -104,6 +112,8 @@ while type(d)!=int:
 
 
 #%% CUSTOMIZE DICTIONARY
+# In this section, we show the user how he may customize the dictionary so that it is tailored to the term he wants to base his analysis on.
+
 # About the compound score
 # -> most used by researches
 # -> between -1 (most extreme negative) and 1 (most extreme positive)
@@ -168,10 +178,11 @@ while type(d)!=int:
 # -> In this case the score from Vader is kept and only new words are scored
 # -> For more information please see addtional script on GitHub called "dictionary_update"
 
-# NOTE: The word lists have been manually copy and pasted
-# -> This allows it to run the program without downloading addtional files
-# -> To see how we collcected and scored the terms please see addtional script on GitHub called "dictionary_update"
+# NOTE: The word lists have been manually copied and pasted
+# -> This allows it to run the program without downloading additional files
+# -> To see how we collcected and scored the terms please see addtional script on GitHub called 'dictionary_update'
 
+# Words describing uncertainity, mostly strongly negative sentiment scores:
 uncertainties_words = {"abeyance": -1.5 , "abeyances": -1.5 , "almost": -1.5 , "alteration": -1.5 , "alterations": -1.5, "ambiguities": -1.5 , "ambiguity": -1.5 , "ambiguous": -1.5 , "anomalies": -1.5 , "anomalous": -1.5 , 
 "anomalously": -1.5 , "anomaly": -1.5 , "anticipate": -1.5 , "anticipated": -1.5 , "anticipates": -1.5 , "anticipating": -1.5 , "anticipation": 0.4 , "anticipations": -1.5 , "apparent": -1.5 , "apparently": -1.5 , 
 "appear": -1.5 , "appeared": -1.5 , "appearing": -1.5 , "appears": -1.5 , "approximate": -1.5 , "approximated": -1.5 , "approximately": -1.5 , "approximates": -1.5 , "approximating": -1.5 , "approximation": -1.5 , 
@@ -200,8 +211,8 @@ uncertainties_words = {"abeyance": -1.5 , "abeyances": -1.5 , "almost": -1.5 , "
 "vaguely": -1.5 , "vagueness": -1.5 , "vaguenesses": -1.5 , "vaguer": -1.5 , "vaguest": -1.5 , "variability": -1.5 , "variable": -1.5 , "variables": -1.5 , "variably": -1.5 , "variance": -1.5 ,
 "variances": -1.5 , "variant": -1.5 , "variants": -1.5 , "variation": -1.5 , "variations": -1.5 , "varied": -1.5 , "varies": -1.5 , "vary": -1.5 , "varying": -1.5 , "volatile": -1.5 , "volatilities": -1.5 , "volatility": -1.5}
 
-constraining_words = {"abide": -1.0 ,
-"abiding": -1.0 , "bound": -1.0 , "bounded": -1.0 , "commit": 1.2 , "commitment": 1.6 , "commitments": 0.5 , "commits": 0.1 , "committed": 1.1 , "committing": 0.3 , "compel": -1.0 , "compelled": 0.2 , "compelling": 0.9 ,
+# Words describing constraints, mostly negative sentiment scores:
+constraining_words = {"abide": -1.0 , "abiding": -1.0 , "bound": -1.0 , "bounded": -1.0 , "commit": 1.2 , "commitment": 1.6 , "commitments": 0.5 , "commits": 0.1 , "committed": 1.1 , "committing": 0.3 , "compel": -1.0 , "compelled": 0.2 , "compelling": 0.9 ,
 "compels": -1.0 , "comply": -1.0 , "compulsion": -1.0 , "compulsory": -1.0 , "confine": -1.0 , "confined": -1.0 , "confinement": -1.0 , "confines": -1.0 , "confining": -1.0 , "constrain": -1.0 ,
 "constrained": -0.4 , "constraining": -1.0 , "constrains": -1.0 , "constraint": -1.0 , "constraints": -1.0 , "covenant": -1.0 , "covenanted": -1.0 , "covenanting": -1.0 , "covenants": -1.0 , "depend": -1.0 , 
 "dependance": -1.0 , "dependances": -1.0 , "dependant": -1.0 , "dependencies": -1.0 , "dependent": -1.0 , "depending": -1.0 , "depends": -1.0 , "dictate": -1.0 , "dictated": -1.0 , "dictates": -1.0 ,
@@ -220,6 +231,7 @@ constraining_words = {"abide": -1.0 ,
 "restricting": -1.6 , "restriction": -1.1 , "restrictions": -1.0 , "restrictive": -1.0 , "restrictively": -1.0 , "restrictiveness": -1.0 , "restricts": -1.3 , "stipulate": -1.0 , "stipulated": -1.0 ,
 "stipulates": -1.0 , "stipulating": -1.0 , "stipulation": -1.0 , "stipulations": -1.0 , "strict": -1.0 , "stricter": -1.0 , "strictest": -1.0 , "strictly": -1.0 , "unavailability": -1.0 , "unavailable": -1.0}
 
+# Words describing positive sentiments, hence mostly strongly positive sentiment scores:
 positive_words = {"able": 1.5 , "abundance": 1.5 , "abundant": 1.5 , "acclaimed": 1.5 , "accomplish": 1.8 , "accomplished": 1.9 , "accomplishes": 1.7 , "accomplishing": 1.5 , "accomplishment": 1.5 ,
 "accomplishments": 1.5 , "achieve": 1.5 , "achieved": 1.5 , "achievement": 1.5 , "achievements": 1.5 , "achieves": 1.5 , "achieving": 1.5 , "adequately": 1.5 , "advancement": 1.5 , "advancements": 1.5 ,
 "advances": 1.5 , "advancing": 1.5 , "advantage": 1.0 , "advantaged": 1.4 , "advantageous": 1.5 , "advantageously": 1.9 , "advantages": 1.5 , "alliance": 1.5 , "alliances": 1.5 , "assure": 1.4 ,
@@ -256,22 +268,21 @@ positive_words = {"able": 1.5 , "abundance": 1.5 , "abundant": 1.5 , "acclaimed"
 "superior": 2.5 , "surpass": 1.5 , "surpassed": 1.5 , "surpasses": 1.5 , "surpassing": 1.5 , "transparency": 1.5 , "tremendous": 1.5 , "tremendously": 1.5 , "unmatched": -0.3 , "unparalleled": 1.5 ,
 "unsurpassed": 1.5 , "upturn": 1.5 , "upturns": 1.5 , "valuable": 2.1 , "versatile": 1.5 , "versatility": 1.5 , "vibrancy": 1.5 , "vibrant": 2.4 , "win": 2.8 , "winner": 2.8 , "winners": 2.1 , "winning": 2.4 , "worthy": 1.9}
 
+# We update the lexicon of our sentiment analyzer with the three dictionaries which we have just built above:
 analyzer.lexicon.update(uncertainties_words)
 analyzer.lexicon.update(constraining_words)
 analyzer.lexicon.update(positive_words)
 
 #%% ADDING WORDS TO LEXICON that still are missing (e.g. slang terms for cryptocurrencies)
-
+# We add a dictionary of 'slang' words that are commonly used in the r/wallstreetbets forum of daytraders on reddit:
 new_words = {"sell": -3, "buy": 3, "moon": 2.5, "mooning": 2.5, "diamond": 1.5, "paper": -1.5, "fomo": 1.5, "shill": -2, "hodl": 1.5, "rekt": -2, "pump": 1.6, "down": -2.0, "downwards": -2.0, "up": 2.0, "upwards": 2.0}
-
 analyzer.lexicon.update(new_words)
 
-# Check if added word is in the lexicon:
-# print(analyzer.lexicon["moon"])
 
 #%% CREATE_HEADERS
 def create_headers(bearer_token):
     # PURPOSE: This function provides the bearer token to the API.
+    #          To obtain authorization from Twitter to use its API, we have to use our personal bearer token.
     # INPUT:   bearer_token
     # OUTPUT:  headers
     # USAGE:   create_headers(bearer_token)
@@ -282,7 +293,9 @@ def create_headers(bearer_token):
 
 #%% GET_RULES
 def get_rules(headers, bearer_token):
-    # PURPOSE: This function requests the current rules in place.
+    # PURPOSE: This function requests the current rules in place. 
+    #          It will return the tweets obtained from the Twitter API in json-format or return an errror ("Cannot get rules HTTP {}")
+    #          With the appropriate HTTP-error-code.
     # INPUT:   headers, bearer_token
     # OUTPUT:  response.json()
     # USAGE:   get_rules(headers, bearer_token)
@@ -311,13 +324,16 @@ def delete_all_rules(headers, bearer_token, rules):
     response = requests.post("https://api.twitter.com/2/tweets/search/stream/rules", headers = headers, json = payload)
     
     if response.status_code != 200:
+        # HTTP Status Code 200 is the response for successful HTTP requests.
+        # In a GET request, the response will contain an entity corresponding to the requested resource.
+        # If we did not obtain a HTTP Status Code 200, we have to raise an exception and output an error message with the appropriate HTTP Error Code:
         raise Exception("Cannot delete rules (HTTP {}): {}".format( response.status_code, response.text))
         
     print(json.dumps(response.json()))
 
 #%% SET_RULES
 def set_rules(headers, delete, bearer_token):
-    # PURPOSE: This function defines the rules on what tweets to pull.
+    # PURPOSE: This function defines the rules on what tweets to pull from the Twitter API.
     # INPUT:   headers, delete, bearer_token
     # OUTPUT:  print(json.dumps(response.json()))
     # USAGE:   set_rules(headers, delete, bearer_token)
@@ -328,23 +344,26 @@ def set_rules(headers, delete, bearer_token):
     response = requests.post("https://api.twitter.com/2/tweets/search/stream/rules", headers = headers, json = payload)
     
     if response.status_code != 201:
+        # HTTP Status Code 201 indicates that the request has been fulfilled, resulting in the creation of a new resource.
+        # If we did not obtain a HTTP Status Code of 201, we have to raise an exception and display an error message with the appropriate HTTP Error Code:
         raise Exception("Cannot add rules (HTTP {}): {}".format(response.status_code, response.text))
         
     print(json.dumps(response.json()))
 
 #%% MOVING_AVERAGE
 def moving_average(x, N):
-    # PURPOSE: This function calculates the moving average
-    # INPUT:   x (list of numbers), N (integer)
+    # PURPOSE: This function calculates the moving average.
+    #          The moving average will smooth the graph of the live twitter sentiment 
+    #          and allow us to base our recommendation on a sample of size N.
+    # INPUT:   Vector x (vector of numbers), Moving average window N (integer)
     # OUTPUT:  a vector as that is the running mean of the input vector
     # USAGE:   running_mean(x, N)
     cumsum = np.cumsum(np.insert(x, 0, 0)) 
     return (cumsum[N:] - cumsum[:-N]) / float(N)
 
 #%% GET_STREAM
-
 def get_stream(headers, set, bearer_token):
-    # PURPOSE: This function starts the Twitter stream
+    # PURPOSE: This function starts the Twitter stream.
     # INPUT:   headers, delete, bearer_token
     # OUTPUT:  BUY/HOLD/SELL Rating, Sentiment scores
     # USAGE:   get_stream(headers, set, bearer_token):
@@ -355,19 +374,27 @@ def get_stream(headers, set, bearer_token):
     my_range = c
     N = d
     
+    # GET Request to Twitter API
     response = requests.get("https://api.twitter.com/2/tweets/search/stream", headers=headers, stream=True)
+    # Print the HTTP Status Code of the GET Request
     print(response.status_code)
     
+    # If the response does not yield a status code of 200 (success), raise an exception and display an error message:
     if response.status_code != 200:
         raise Exception("Cannot get stream (HTTP {}): {}".format(response.status_code, response.text))
-        
+    
+    # Loop through all the lines in the response from the Twitter API:
     for response_line in response.iter_lines():
         
         if response_line:
+            # Get the data in json format
             json_response = json.loads(response_line)
+            # Obtain the texts in the tweets
             tweet = json_response['data']['text']
+            # delete colons
             tweet = tweet.replace(':', '')
             try:
+                # If tweets are in English language and if we haven't yet obtained the desired number of tweets, continue the loop:
                 if detect(tweet) == 'en' and len(sentimentList) < my_range:
                     # Function from VADER (sentiment analysis model that measures polarity and intensity of emotions)
                     vs = analyzer.polarity_scores(tweet)
@@ -410,7 +437,9 @@ def get_stream(headers, set, bearer_token):
                     # Add 1 to x_vector after every iteration
                     x_vec.append(x_vec[-1] + 1) 
                     
-                    # PRINT SENTIMENT SCORES FOR INDIVIDUAL TWEETS
+                    # PRINT NET SENTIMENT SCORES FOR INDIVIDUAL TWEETS
+                    # Here, we want to display the net sentiment scores for individual tweets directly in the console window, so that the user may observe the Twitter sentiment live.
+                    # Because we are using a moving average, we lower the threshold for positive and negative compounds appropriately from 0.5 to 0.33 and from -0.5 to -0.33:
                     if vs["compound"] > 0.33:
                         # \033 (Escape code for colour; 1 (bold style); 32 (Bright Green); 40m (black background colour)
                         print("\033[1;32;40m Net sentiment score:", vs["compound"], "\n")
@@ -423,12 +452,15 @@ def get_stream(headers, set, bearer_token):
                         # \033 (Escape code for colour; 1 (bold style); 33 (Yellow); 40m (black background colour)
                         print("\033[1;33;40m Net sentiment score:", vs["compound"], "\n")
                         
-                # PRINT BUY/HOLD/SELL RATING  BASED ON AVERAGE SENTIMENT OF LAST N SCORES
+                # PRINT BUY/HOLD/SELL RATING  BASED ON AVERAGE SENTIMENT OF LAST N TWEETS
+                # Once we reached the desired number of tweets, we generate a recommendation:
                 if len(sentimentList) != 0 and len(sentimentList)%my_range == 0:
+                    # Take the last N Tweets, calling it 'endList':
                     endList = sentimentList[-N:]
+                    # Print the mean of the sentiment score of the last N tweets:
                     print("\033[0;0m ********* Sentiment mean score of last " +str(N) +" tweets: " + str(round(np.mean(endList), 2)))
                     
-                    # summary about the inputs
+                    # Print a summary of the inputs
                     print("----------------------------------------------------------------------------------")
                     print("----------------------------------------------------------------------------------")
                     print("Ok. We are done. Based on ", c, " tweets about '", a, "' we evaluated their sentiment score.", 
