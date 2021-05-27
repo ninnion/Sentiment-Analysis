@@ -72,9 +72,11 @@ Use for updating the Vader lexicon
 - Some lists are taken to update the Vader lexicon
 - The goal is to improve the sentiment score in the context of financial terms
 - The addition of follwoing word lists have been made:
-         Uncertanty (297 terms)
-         Constraining (184 terms)
-         Positve (354 terms)
+Wordlist | number of terms
+--- | ---
+Uncertanty | 297 terms
+Constraining | 184 terms
+Positve | 354 terms
 
 Double entries:
 - The word lists also contain terms that are already occuring in the Vader lexicon
