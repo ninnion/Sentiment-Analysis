@@ -71,7 +71,6 @@ Source and further information about the development of the word list
 Use for updating the Vader lexicon
 - Some lists are taken to update the Vader lexicon
 - The goal is to improve the sentiment score in the context of financial terms
-- To see how the strings of terms are created please see the additional `dictionary_update.py` script also here on github
 - The addition of follwoing word lists have been made:
          Uncertanty (297 terms)
          Constraining (184 terms)
@@ -80,11 +79,14 @@ Use for updating the Vader lexicon
 Double entries:
 - The word lists also contain terms that are already occuring in the Vader lexicon
 - In this case the score from Vader is kept and only new words are scored
-- For more information please see addtional script on GitHub called "dictionary_update"
 
 NOTE: The word lists have been manually copy and pasted
 - This allows it to run the program without downloading addtional files
-- To see how we collcected and scored the terms please see addtional script on GitHub called "dictionary_update"
+
+Please find more detailed information about the dictionary expansion in our additonal script `dictionary_update.py`:
+- How we collected and scored the terms
+- How the strings of terms are created
+- And how we treated double entries
 
 3. Plotting of the analysed tweets based on the moving average of the N last tweets.
 
