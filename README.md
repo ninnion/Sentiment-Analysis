@@ -75,7 +75,7 @@ This GitHub page contains the following files:
 The code analyses the sentiment of tweets obtained via the Twitter API in real time, assings each tweet a sentiment score, displays it graphically and in the console window, and generates a Buy / Hold / Sell recommendation based on the most recent average sentiment.  
 The code therefore is structured as follows:
 
-#### 1. Access and communication to and with the Twitter API
+#### 1. Access and communication with the Twitter API
 
 The code interacts with the Twitter API through five functions; `create_headers`, `get_rules`, `delete_all_rules`, `set_rules` and `get_stream`.
 
@@ -84,6 +84,11 @@ The code interacts with the Twitter API through five functions; `create_headers`
 - `delete_all_rules`: This function resets all rules.
 - `set_rules`: Defines the rules on which tweets to pull from the API, by sending the search term (e.g. "bitcoin") to the API.
 - `get_stream`: This function starts the Twitter stream and the tweets are being collected, analyzed and displayed.
+
+Below you will see the input questions of our script as well as possible inputs form the user:
+
+![dogecoin_input_console](https://user-images.githubusercontent.com/60882754/119817766-a5e9f800-beee-11eb-91d0-c6a04a4a3518.PNG)
+
 
 #### 2. Analysis of the collected tweets
 
