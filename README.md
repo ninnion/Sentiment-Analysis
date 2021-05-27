@@ -2,11 +2,11 @@
 
 ## About
 
-**Welcome** to the student project of **group No. 2306** of the course **Skills: Programming with Advanced Computer Languages (8,789,1.00)** taught by **Dr. Mario Silic** at the **University of St. Gallen**.  
+Welcome to the project of **Group No. 2306** of the course **Skills: Programming with Advanced Computer Languages (8,789,1.00)** taught by **Dr. Mario Silic** at the **University of St. Gallen**.  
 
 The goal of this project was to build a **Python** based script to analyze the **Twitter sentiment** about **crypto-currencies**, display the sentiment graphically **in real time** and generate **buy, sell or hold** recommendations based on a window of the most recent tweets.  
 
-Additional information and details about the inner workings of our code can also be found in the comments of our script.  
+Additional information and details about the inner workings of our code can also be found in the comments of our script `2306_sentiment_analysis.py`.
 
 **Members of Group No. 2306**
 
@@ -26,6 +26,7 @@ To run the code, the libraries `vaderSentiment` and `langdetect` need to be inst
 To install them, simply write 
 - `pip install vaderSentiment` and 
 - `pip install langdetect` 
+
 in your command prompt (e.g. in the Anaconda Prompt).  
 
 Apart from these two libraries, the libraries  
@@ -40,6 +41,7 @@ The script accesses live tweets through the Twitter Developer API, which demands
 of this script.  
 
 Please create your own bearer token, since the one written in the current script can not guarantee access to the Twitter API indefinitely.  
+
 To create your own bearer token, create a Twitter account and access the Twitter Developer platform, by clicking on this [link](https://developer.twitter.com/en) and following the instructions step-by-step.
 
 
@@ -80,7 +82,7 @@ The code interacts with the Twitter API through five functions; `create_headers`
 - `create_headers`: This function provides the bearer token to the API.
 - `get_rules`: This function requests the current rules in place.
 - `delete_all_rules`: This function resets all rules.
-- `set_rules`: This function defines the rules on which tweets to pull from the API, by sending the search term (e.g. "bitcoin") to the API.
+- `set_rules`: Defines the rules on which tweets to pull from the API, by sending the search term (e.g. "bitcoin") to the API.
 - `get_stream`: This function starts the Twitter stream and the tweets are being collected, analyzed and displayed.
 
 #### 2. Analysis of the collected tweets
