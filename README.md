@@ -56,36 +56,36 @@ The code analyses the sentiment of tweets in real time. The code therefore is st
 2. Analysis of the collected tweets and allocation of a sentiment score between -1.00 (strong negative sentiment) and 1.00 (strong positive sentiment).
 
 >   - With the help of the [Vader lexicon](https://github.com/cjhutto/vaderSentiment), which is additionally updated with manually classified financial terms from the Loughran-McDonald sentiment [word list](https://sraf.nd.edu/textual-analysis/resources/#Master%20Dictionary), the streamed tweets are being analyzed.
-
+>
 >   About the Loughran-McDonald sentiment word lists
 >   - developed word lists to be used for financial content analysis
 >   - term classifications regarding a large sample of 10Ks
 >   - different categories of words lists like (negative, positive, uncertainty, constraining, etc.)
-
+>
 >   Source and further information about the development of the word list
 >   - Loughran, Tim and McDonald, Bill, When is a Liability not a Liability?
 >   - Textual Analysis, Dictionaries, and 10-Ks (March 4, 2010)
 >   - Journal of Finance, Forthcoming
 >   - Available at [SSRN](https://ssrn.com/abstract=1331573)
-
+>
 >   Use for updating the Vader lexicon
 >   - Some lists are taken to update the Vader lexicon
 >   - The goal is to improve the sentiment score in the context of financial terms
 >   - The addition of follwoing word lists have been made:
-
+>
 >     | Wordlist      | number of terms|
 >     | ------------- |:--------------:|
 >     | Uncertainty   | 297 terms      |
 >     | Constraining  | 184 terms      |
 >     | Positive      | 354 terms      |
-
+>
 >   Double entries:
 >   - The word lists also contain terms that are already occuring in the Vader lexicon
 >   - In this case the score from Vader is kept and only new words are scored
-
+>
 >   NOTE: The word lists have been manually copy and pasted
 >   - This allows it to run the program without downloading addtional files
-
+>
 >   Please find more detailed information about the dictionary expansion in our additonal script `dictionary_update.py`:
 >   - How we collected and scored the terms
 >   - How the strings of terms are created
