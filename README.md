@@ -11,9 +11,7 @@ based on a certain amount of currently analyzed tweets.
 We recommend using the Spyder IDE (Version 4.2.5, currently working with Python version 3.8.8) since the program plots the twitter sentiment *live*, which is
 best displayed in the mentioned IDE in a seperate plotting pane.  
 
-To run the code, the libraries `vaderSentiment` and `langdetect` need to be installed and loaded.  
-To install them, write `pip install vaderSentiment` and `pip install langdetect` in your command prompt.  
-Apart from these two libraries, the libraries `requests`, `json`, `numpy` and `matplotlib` need to be loaded as well.
+To run the code, the libraries `vaderSentiment` and `langdetect` need to be installed and loaded. To install them, write `pip install vaderSentiment` and `pip install langdetect` in your command prompt. Apart from these two libraries, the libraries `requests`, `json`, `numpy` and `matplotlib` need to be loaded as well.
 
 The script gets live tweets through the Twitter developer API, which needs a personal token for authentification (bearer token) to accept the requests 
 of the script. Please create your own bearer token, since the one written in the current script is not guaranteed to be accessible forever. To access the Twitter Developer platform, a Twitter account is needed. The personal bearer token to access the Twitter API can be created by clicking on 
