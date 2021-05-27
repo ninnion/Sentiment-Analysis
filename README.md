@@ -54,7 +54,7 @@ right corner). We also recommend using the default settings of your IDE, since o
 
 3. (Recommended) Exchange the existing bearer token with your own bearer token in code line 52.
 
-4. Run the file `2306_sentiment_analysis.py ` in your IDE.
+4. Run the file `2306_sentiment_analysis.py` in your IDE.
 
 5. Fill in the input requested in the console window of your IDE (search tag/term, number of tweets to be analyzed, moving average window).
 
