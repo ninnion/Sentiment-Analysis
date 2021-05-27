@@ -32,7 +32,7 @@ right corner). We also recommend using the IDE on default settings, since otherw
 
 ### Files
 ----
-- Code File: `sentiment_analysis.py`
+- Code File: `2306_sentiment_analysis.py`
 - Dictionary Update script: `dictionary_update.py`
 - Financial lexicon: `LoughranMcDonald_SentimentWordLists_2018.xslx`
 - Vader lexicon: `vader_lexicon.xslx`
