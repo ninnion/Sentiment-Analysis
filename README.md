@@ -55,7 +55,7 @@ The code analyses the sentiment of tweets in real time. The code therefore is st
 
 2. Analysis of the collected tweets and allocation of a sentiment score between -1.00 (strong negative sentiment) and 1.00 (strong positive sentiment).
 
-- With the help of the Vader lexicon, which is additionally updated with manually classified financial terms from the Loughran-McDonald sentiment word list, the streamed tweets are being analyzed.
+- With the help of the [Vader lexicon](https://github.com/cjhutto/vaderSentiment), which is additionally updated with manually classified financial terms from the Loughran-McDonald sentiment word list, the streamed tweets are being analyzed.
 
    About the Loughran-McDonald sentiment word lists
    - developed word lists to be used for financial content analysis
