@@ -365,11 +365,8 @@ def get_stream(headers, set, bearer_token):
         
         if response_line:
             json_response = json.loads(response_line)
-            #print(json.dumps(json_response, indent=4, sort_keys=True))
             tweet = json_response['data']['text']
-            #tweet = p.clean(tweet)
             tweet = tweet.replace(':', '')
-            #print(tweet)
             try:
                 if detect(tweet) == 'en' and len(sentimentList) < my_range:
                     # Function from VADER (sentiment analysis model that measures polarity and intensity of emotions)
@@ -430,8 +427,6 @@ def get_stream(headers, set, bearer_token):
                 # PRINT BUY/HOLD/SELL RATING  BASED ON AVERAGE SENTIMENT OF LAST N SCORES
                 if len(sentimentList) != 0 and len(sentimentList)%my_range == 0:
                     endList = sentimentList[-N:]
-                    # QUESTION: Maybe check that!
-                    # print("\033[0;0m ********* Net sentiment score of last N tweets: " + str(sum(endList)))
                     print("\033[0;0m ********* Sentiment mean score of last " +str(N) +" tweets: " + str(round(np.mean(endList), 2)))
                     
                     # summary about the inputs
