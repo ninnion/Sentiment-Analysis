@@ -54,6 +54,64 @@ BEARER_TOKEN = "AAAAAAAAAAAAAAAAAAAAAGdBNgEAAAAAebL5tbsCMiq7TRRAskhG67nHrAg%3Dyf
 #%% ANALYZER
 analyzer = SentimentIntensityAnalyzer()
 
+#%% INPUTS
+
+# QUESTION:
+# Maybe define a function called "get_input()" that we call in main()???
+
+    
+# Ask for a single word for which we want to perform our sentiment analysis (e.g: 'bitcoin')
+a = (input("\033[0;0m Hi there! Please enter a single word (like 'bitcoin') to perform a live Twitter sentiment analysis: "))
+# colour code reset to delete any colour that might be from past runs
+
+# Check if the entered input can be transformed into a string
+while type(a) != str:
+  try:
+    a = str(a) # Try to convert input to string
+  except:
+    print("Only strings can be counted!")
+    a = (input("Please try again with a string? ")) # Ask to input a string if conversion failed
+    continue
+
+# Check if the input was only one word, if not, ask user to enter one word only
+while len(a.split()) != 1:
+    print("You entered more than one word or nothing")
+    a = input("Please try again and enter only ONE term? ")
+
+# Add a hashtag to the input so that we may search for both hasthags (e.g.: '#bitcoin') and words (e.g.: 'bitcoin')
+b = "#" + a
+
+# QUESTION: case sensitivity!! Should we put the input all to lower case?
+# a.lower() -> would be better for hashtags, but not good for Ticker search (e.g. BTC, AAPL)
+
+
+# asking for the input regarding amount of tweets (my_range)
+c = input("Please enter also the maximum number of tweets you want to get. We recommend any number below 500: ")
+# try if entered string can be transformed into an integer
+# otherwise the user will be asked again to enter a number, again and again
+while type(c)!=int:
+  try:
+    c = int(c)
+  except:
+    print("Sorry, only integers are allowed!")
+    c = (input("Please try again and enter an integer for the total number of tweets to analyse? "))
+    continue
+# Recommend max 500 Tweets
+# Twitter API may become exhausted, user has to wait for a while
+
+# asking for the input regarding the moving average (N)
+d = input("Now please select the window for the moving average (average of n-last entries; recommended range: 5-20): ")
+# try if entered string can be transformed into an integer
+# otherwise the user will be asked again to enter a number, again and again
+while type(d)!=int:
+  try:
+    d = int(d)
+  except:
+    print("Sorry, only integers are allowed!")
+    d = (input("Please try again and enter an integer for the moving average? "))
+    continue
+
+
 #%% CUSTOMIZE DICTIONARY
 # About the compound score
 # -> most used by researches
@@ -294,70 +352,6 @@ def moving_average(x, N):
     cumsum = np.cumsum(np.insert(x, 0, 0)) 
     return (cumsum[N:] - cumsum[:-N]) / float(N)
 
-#%% INPUTS
-
-# QUESTION:
-# Maybe define a function called "get_input()" that we call in main()???
-
-    
-# Ask for a single word for which we want to perform our sentiment analysis (e.g: 'bitcoin')
-a = (input("\033[0;0m Hi there! Please enter a single word (like 'bitcoin') to perform a live Twitter sentiment analysis: "))
-# colour code reset to delete any colour that might be from past runs
-
-# Check if the entered input can be transformed into a string
-while type(a) != str:
-  try:
-    a = str(a) # Try to convert input to string
-  except:
-    print("Only strings can be counted!")
-    a = (input("Please try again with a string? ")) # Ask to input a string if conversion failed
-    continue
-
-# Check if the input was only one word, if not, ask user to enter one word only
-while len(a.split()) != 1:
-    print("You entered more than one word or nothing")
-    a = input("Please try again and enter only ONE term? ")
-
-# Add a hashtag to the input so that we may search for both hasthags (e.g.: '#bitcoin') and words (e.g.: 'bitcoin')
-b = "#" + a
-
-# QUESTION: case sensitivity!! Should we put the input all to lower case?
-# a.lower() -> would be better for hashtags, but not good for Ticker search (e.g. BTC, AAPL)
-
-
-# asking for the input regarding amount of tweets (my_range)
-c = input("Please enter also the maximum number of tweets you want to get. We recommend any number below 500: ")
-# try if entered string can be transformed into an integer
-# otherwise the user will be asked again to enter a number, again and again
-while type(c)!=int:
-  try:
-    c = int(c)
-  except:
-    print("Sorry, only integers are allowed!")
-    c = (input("Please try again and enter an integer for the total number of tweets to analyse? "))
-    continue
-# Recommend max 500 Tweets
-# Twitter API may become exhausted, user has to wait for a while
-
-# asking for the input regarding the moving average (N)
-d = input("Now please select the window for the moving average (average of n-last entries; recommended range: 5-20): ")
-# try if entered string can be transformed into an integer
-# otherwise the user will be asked again to enter a number, again and again
-while type(d)!=int:
-  try:
-    d = int(d)
-  except:
-    print("Sorry, only integers are allowed!")
-    d = (input("Please try again and enter an integer for the moving average? "))
-    continue
-
-# summary about the inputs
-print("----------------------------------------------------------------------------------")
-print("Ok. We ready to go and looking to get ", c, " tweets about: ", a, "!",
-      " We will evaluate their sentiment score and give you a recommendation based on a moving average of ", d, ".", sep = "")
-print("----------------------------------------------------------------------------------")
-
-
 #%% GET_STREAM
 # QUESTION: Find out how to break the loop!
 
@@ -453,6 +447,14 @@ def get_stream(headers, set, bearer_token):
                     # QUESTION: Maybe check that!
                     # print("\033[0;0m ********* Net sentiment score of last N tweets: " + str(sum(endList)))
                     print("\033[0;0m ********* Sentiment mean score of last " +str(N) +" tweets: " + str(round(np.mean(endList), 2)))
+                    # summary about the inputs
+                    print("----------------------------------------------------------------------------------")
+                    print("Ok. We ready to go and looking to get ", c, " tweets about: ", a, "!",
+                          " We will evaluate their sentiment score and give you a recommendation based on a moving average of ", d, ".", sep = "")
+                    print("----------------------------------------------------------------------------------")
+                    print("----------------------------------------------------------------------------------")
+                    print("
+                          
                                                 
                     # Printing out the BUY/HOLD/SELL rating based on the sentiment of the last my_range tweets
                     if np.mean(endList) >= 0.33:
