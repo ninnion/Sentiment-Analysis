@@ -161,3 +161,4 @@ Below you can see how the bu/hold/sell-recommendation should look like in your I
 
 **Please note that this is a mere suggestion and no financial advice and that the students of this group cannot be held accountable for any transactions that the user of this script may initiate.** 
 
+You have reached the end of our documentation. We hope that you enjoyed analyzing twitter sentiment live on your device!
