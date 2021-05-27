@@ -21,7 +21,7 @@ this [link](https://developer.twitter.com/en) and following the instructions ste
 ----
 1. Download this repository or copy the code into your IDE. 
 2. Make sure that all pre-requisites are met. We highly recommend using the Spyder IDE and making the "Plots" window visible (which is usually in the upper
-right corner).
+right corner). We also recommend using the IDE on default settings, since otherwise the plotting may not be displayed as intended.
 3. (Recommended) Exchange the existing bearer token with your own bearer token in code line 52.
 4. Run the code.
 5. Fill in the wanted input (search tag/term, the amount of tweets to be analyzed, the amount of tweets included in the moving average window).
