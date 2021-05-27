@@ -403,7 +403,6 @@ def get_stream(headers, set, bearer_token):
                     # Add plot title, x-axis label and y-axis label.
                     plt.title(str(N) +"-Mov. Avg. of Twitter Sent. Scores for Term " +"'" +a.upper() +"'")
                     plt.xlabel("Tweet Number")
-                    # plt.ylabel(str(N) +"-Mov. Avg. of Sent. Scores")
                     # Add a legend
                     plt.legend(loc = "upper left")
                     # Pause the plot shortly after every iteration
