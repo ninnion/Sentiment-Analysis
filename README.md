@@ -16,9 +16,7 @@ To install them, write `pip install vaderSentiment` and `pip install langdetect`
 Apart from these two libraries, the libraries `requests`, `json`, `numpy` and `matplotlib` need to be loaded as well.
 
 The script gets live tweets through the Twitter developer API, which needs a personal token for authentification (bearer token) to accept the requests 
-of the script.  
-Please create your own bearer token, since the one written in the current script is not guaranteed to be accessible forever.  
-To access the Twitter Developer platform, a Twitter account is needed. The personal bearer token to access the Twitter API can be created by clicking on 
+of the script. Please create your own bearer token, since the one written in the current script is not guaranteed to be accessible forever. To access the Twitter Developer platform, a Twitter account is needed. The personal bearer token to access the Twitter API can be created by clicking on 
 this [link](https://developer.twitter.com/en) and following the instructions step-by-step.
 
 ### Instructions
