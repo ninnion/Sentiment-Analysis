@@ -55,11 +55,6 @@ BEARER_TOKEN = "AAAAAAAAAAAAAAAAAAAAAGdBNgEAAAAAebL5tbsCMiq7TRRAskhG67nHrAg%3Dyf
 analyzer = SentimentIntensityAnalyzer()
 
 #%% INPUTS
-
-# QUESTION:
-# Maybe define a function called "get_input()" that we call in main()???
-
-    
 # Ask for a single word for which we want to perform our sentiment analysis (e.g: 'bitcoin')
 a = (input("\033[0;0m Hi there! Please enter a single word (like 'bitcoin') to perform a live Twitter sentiment analysis: "))
 # colour code reset to delete any colour that might be from past runs
