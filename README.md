@@ -155,7 +155,7 @@ Below you can see how the plotting pane and the console output should look in yo
 
 Once we have reached the desired number of tweets (which the user has previously defined in the console window of his IDE, i.e. the variable `my_range`), the script will automatically generate a buy/hold/sell-recommendation for the crypto-currency in question, based on the `N` most recently analyzed tweets.  
 
-Below you can see how the bu/hold/sell-recommendation should look like in your IDE once the program has stopped running:
+Below you can see how the buy/hold/sell-recommendation should look like in your IDE once the program has stopped running:
 
 ![dogecoin_recommendation_half](https://user-images.githubusercontent.com/60882754/119815638-0deb0f00-beec-11eb-808e-5db4b64214fa.PNG)
 
