@@ -12,10 +12,10 @@ Additional information and details about the inner workings of our code can also
 
   | Name               | Student ID | CodingXCamp ID | GitHub ID        |
   | ------------------ |:----------:|:-------------: |:----------------:|
-  | Julian Flemming    | 16-608-143 | JulianF.       | ninnion          |
-  | Simona Heim        | 15-613-623 | tapioca        | tapioca7         |
-  | Alexandre Moine    | 15-052-319 | MrPineapple    | GoldenPineappleR |
-  | Matthias Spichiger | 15-937-667 | Matt 32        | MatthiasSP       |
+  | Julian F.          | 16-608-143 | JulianF.       | ninnion          |
+  | Simona H.          | 15-613-623 | tapioca        | tapioca7         |
+  | Alexandre M.       | 15-052-319 | MrPineapple    | GoldenPineappleR |
+  | Matthias S.        | 15-937-667 | Matt 32        | MatthiasSP       |
 
 ### Pre-requisites
 ----
