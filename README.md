@@ -95,7 +95,7 @@ The code analyses the sentiment of tweets in real time. The code therefore is st
 
    ![DOGECOIN_RUNNING](https://user-images.githubusercontent.com/60882754/119736808-96cb6180-be7e-11eb-8c61-cc6085596b8e.PNG)
 
-   - To make the current sentiment and its change over the past short time period more readable and interpretable, the data is being visualized by plotting the moving average.
-   - At the end of the analysed time frame, a buy, sell or hold suggestion is displayed.
+>   - To make the current sentiment and its change over the past short time period more readable and interpretable, the data is being visualized by plotting the moving average.
+>   - At the end of the analysed time frame, a buy, sell or hold suggestion is displayed.
 
    ![DOGECOIN_RESULT](https://user-images.githubusercontent.com/60882754/119736840-a185f680-be7e-11eb-94f5-502844e16106.PNG)
