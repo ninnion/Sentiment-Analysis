@@ -76,10 +76,6 @@ while len(a.split()) != 1:
 # Add a hashtag to the input so that we may search for both hasthags (e.g.: '#bitcoin') and words (e.g.: 'bitcoin')
 b = "#" + a
 
-# QUESTION: case sensitivity!! Should we put the input all to lower case?
-# a.lower() -> would be better for hashtags, but not good for Ticker search (e.g. BTC, AAPL)
-
-
 # asking for the input regarding amount of tweets (my_range)
 c = input("Please enter also the maximum number of tweets you want to get. We recommend any number below 500: ")
 # try if entered string can be transformed into an integer
@@ -265,15 +261,13 @@ analyzer.lexicon.update(constraining_words)
 analyzer.lexicon.update(positive_words)
 
 #%% ADDING WORDS TO LEXICON that still are missing (e.g. slang terms for cryptocurrencies)
-# Add slang such as "to the moon", "diamond hands", "paper hands", ...
 
 new_words = {"sell": -3, "buy": 3, "moon": 2.5, "mooning": 2.5, "diamond": 1.5, "paper": -1.5, "fomo": 1.5, "shill": -2, "hodl": 1.5, "rekt": -2, "pump": 1.6, "down": -2.0, "downwards": -2.0, "up": 2.0, "upwards": 2.0}
 
 analyzer.lexicon.update(new_words)
 
-# Check if added word is in the lexicon
+# Check if added word is in the lexicon:
 # print(analyzer.lexicon["moon"])
-
 
 #%% CREATE_HEADERS
 def create_headers(bearer_token):
@@ -348,9 +342,6 @@ def moving_average(x, N):
     return (cumsum[N:] - cumsum[:-N]) / float(N)
 
 #%% GET_STREAM
-# QUESTION: Find out how to break the loop!
-
-# Maybe add a counter -> Stop the program, evaluate mean of last observations?
 
 def get_stream(headers, set, bearer_token):
     # PURPOSE: This function starts the Twitter stream
