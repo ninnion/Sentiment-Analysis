@@ -40,8 +40,8 @@ right corner). We also recommend using the IDE on default settings, since otherw
 ### Description
 ----
 The code analyses the sentiment of tweets in real time. The code therefore is structured as follows:
-
-1. Access and communication to and with the Twitter API
+<ol>
+   <li> 1. Access and communication to and with the Twitter API </li>
 
    The code interacts with the Twitter API through five functions, `create_headers`, `get_rules`, `delete_all_rules`, `set_rules` and `get_stream`.
 
@@ -99,5 +99,5 @@ The code analyses the sentiment of tweets in real time. The code therefore is st
    - At the end of the analysed time frame, a buy, sell or hold suggestion is displayed.
 
    ![DOGECOIN_RESULT](https://user-images.githubusercontent.com/60882754/119736840-a185f680-be7e-11eb-94f5-502844e16106.PNG)
-
+</ol>
 ----
