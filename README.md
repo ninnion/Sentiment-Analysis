@@ -4,7 +4,7 @@
 ----
 This is a student project of the University of St. Gallen of the course *Skills - Programming with Advanced Computer Languages (8,789,1.00)*.  
 The goal of this project was to build a python based script to analyze tweets about crypto currencies in real time and generate buy, sell or hold recommendations 
-based on a certain amount of currently analyzed tweets.
+based on a certain amount of currently analyzed tweets. Addiotonal information and details about how the code works can be found in the commented code itself.
 
 ### Pre-requisites
 ----
