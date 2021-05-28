@@ -519,7 +519,7 @@ def get_stream(headers, set, bearer_token):
             
 #%% RUN THE PROGRAM
 def main():
-    # PURPOSE: This function runs the whole program.
+    # PURPOSE: This function runs the whole program
     bearer_token = BEARER_TOKEN
     headers = create_headers(bearer_token)
     rules = get_rules(headers, bearer_token)
