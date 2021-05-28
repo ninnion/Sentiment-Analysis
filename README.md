@@ -1,7 +1,7 @@
 # Sentiment-Analysis
 
 ## About
-----
+
 Welcome to the project of **Group No. 2306** of the course **Skills: Programming with Advanced Computer Languages (8,789,1.00)** taught by **Dr. Mario Silic** at the **University of St. Gallen**.  
 
 The goal of this project was to build a **Python** based script to analyze the **Twitter sentiment** about **crypto-currencies**, display the sentiment graphically **in real time** and generate **buy, sell or hold** recommendations based on a window of the most recent tweets.  
