@@ -17,7 +17,7 @@ Additional information and details about the inner workings of our code can also
   | Alexandre M.       | 15-052-319 | MrPineapple    | GoldenPineappleR |
   | Matthias S.        | 15-937-667 | Matt 32        | MatthiasSP       |
 
-### Pre-requisites
+### Prerequisites
 ----
 We recommend using the **Spyder IDE** (Version 4.2.5, currently working with Python version 3.8.8) since the program plots the twitter sentiment *live*, which is
 best displayed in the mentioned IDE in a **seperate plotting pane**.  
@@ -49,7 +49,7 @@ To create your own bearer token, create a Twitter account and access the Twitter
 ----
 1. Download this repository or copy the code into your IDE.  
 
-2. Make sure that all pre-requisites are met. We highly recommend using the Spyder IDE and making the "Plots" window visible (found in the upper
+2. Make sure that all prerequisites are met. We highly recommend using the Spyder IDE and making the "Plots" window visible (found in the upper
 right corner). We also recommend using the default settings of your IDE, since otherwise the plotting may not be displayed as intended.
 
 3. (Recommended) Exchange the existing bearer token with your own bearer token in code line 52.
